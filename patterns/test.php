@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Title: Footer with colophon, 4 columns
@@ -47,7 +46,6 @@
     </div>
     <!-- /wp:columns -->
     
-    <!-- Repeat the columns block for other services -->
     <!-- wp:columns {"style":{"spacing":{"blockGap":"20px"}}} -->
     <div class="wp-block-columns">
         
@@ -78,7 +76,6 @@
     </div>
     <!-- /wp:columns -->
     
-    <!-- Third row -->
     <!-- wp:columns {"style":{"spacing":{"blockGap":"20px"}}} -->
     <div class="wp-block-columns">
         
