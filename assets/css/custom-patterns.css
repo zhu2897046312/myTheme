@@ -1,0 +1,36 @@
+
+.wp-block-cover.custom-medical-cover {
+    transition: transform 0.3s ease;
+  }
+  
+  .wp-block-cover.custom-medical-cover:hover {
+    transform: scale(1.02);
+  }
+  
+  .wp-block-heading.medical-title {
+    position: relative;
+    padding-bottom: 15px;
+  }
+  
+  .wp-block-heading.medical-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: #fff;
+  }
+  
+  .wp-block-group.medical-service-card {
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .wp-block-group.medical-service-card:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-5px);
+  }
