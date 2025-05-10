@@ -1,0 +1,12 @@
+.solution-content {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.solution-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #878787;
+}

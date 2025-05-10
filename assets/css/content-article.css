@@ -1,0 +1,70 @@
+/* ===== 文章卡片链接样式 ===== */
+/* 标题链接 */
+.article-title a {
+    color: #2b2d42;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .article-title a:hover {
+    color: #d90429;
+    text-decoration: underline;
+  }
+  
+  /* 分类链接 */
+  .post-categories a {
+    color: #8d99ae;
+    font-size: 0.9em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: #f8f9fa;
+  }
+  
+  .post-categories a:hover {
+    background: #edf2f4;
+    color: #2b2d42;
+  }
+  
+  /* 标签链接 */
+  .post-tags a {
+    display: inline-block;
+    padding: 4px 8px;
+    margin: 2px;
+    background: #eff6ff;
+    color: #2563eb;
+    border-radius: 4px;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+  }
+  
+  .post-tags a:hover {
+    background: #dbeafe;
+    transform: translateY(-1px);
+  }
+  
+  /* 编辑链接 */
+  .edit-link a {
+    font-size: 0.8em;
+    color: #6b7280 !important;
+    border: 1px solid #e5e7eb;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  
+  .edit-link a:hover {
+    background: #f3f4f6;
+    text-decoration: none;
+  }
+  
+  /* 移动端适配 */
+  @media (max-width: 768px) {
+    .article-title a {
+      font-size: 1.2rem;
+    }
+    
+    .post-categories a {
+      font-size: 0.8em;
+      padding: 1px 4px;
+    }
+  }

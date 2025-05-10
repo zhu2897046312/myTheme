@@ -1,0 +1,20 @@
+{
+  "styles": {
+  "blocks": {
+    "core/navigation": {
+      "typography": {
+        "fontSize": "var(--wp--preset--font-size--small)"
+      }
+    },
+    "core/search": {
+      "elements": {
+        "button": {
+          "color": {
+            "text": "var(--wp--preset--color--contrast)"
+          }
+        }
+      }
+    }
+  }
+}
+}

@@ -1,0 +1,143 @@
+/* ===== 404页面样式 ===== */
+.error-404 {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* 标题样式 */
+.page-title {
+    color: #dc3545;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.page-title:before {
+    content: "\26A0"; /* 警告图标 */
+    font-size: 1.2em;
+    display: inline-block;
+    animation: bounce 1s infinite;
+}
+
+/* 内容区域 */
+.page-content {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+
+/* 搜索表单 */
+.search-form {
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.search-form input[type="search"] {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #dee2e6;
+    border-radius: 50px;
+    font-size: 1.1rem;
+}
+
+.search-form input[type="submit"] {
+    margin-top: 1rem;
+    padding: 0.8rem 2rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-form input[type="submit"]:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* 小工具通用样式 */
+.widget {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.widgettitle {
+    color: #343a40;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* 分类列表 */
+.widget_categories ul {
+    columns: 2;
+    list-style: none;
+    padding: 0;
+}
+
+.widget_categories li {
+    margin-bottom: 0.5rem;
+    break-inside: avoid;
+}
+
+.widget_categories a {
+    color: #6c757d;
+    text-decoration: none;
+    padding: 0.3rem 0;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.widget_categories a:hover {
+    color: #007bff;
+}
+
+/* 标签云 */
+.tagcloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tagcloud a {
+    background: #e9ecef;
+    color: #495057;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem !important;
+    transition: all 0.3s ease;
+}
+
+.tagcloud a:hover {
+    background: #007bff;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* 动画 */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2.5rem;
+    }
+    
+    .widget_categories ul {
+        columns: 1;
+    }
+}
