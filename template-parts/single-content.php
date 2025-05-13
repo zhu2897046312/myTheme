@@ -3,7 +3,7 @@
  * 文章内容模板部件 - 用于列表页展示文章完整内容
  */
 ?>
-
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/single-content.css">
 <article id="post-<?php the_ID(); ?>" <?php post_class('article-card'); ?>>
     
     <!-- 特色图像 -->

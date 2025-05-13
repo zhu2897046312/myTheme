@@ -1,12 +1,13 @@
 <?php
 /**
  * The template for displaying all single pages
- * Template Name: 解决方案
+ * Template Name: page template
  * Template Post Type: page
  */
 
 get_header(); ?>
 
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/page.css">
 <main id="primary" class="site-main">
     <div class="container">
         <?php

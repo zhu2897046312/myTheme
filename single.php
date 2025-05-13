@@ -1,7 +1,7 @@
 <?php
 /**
  * The template for displaying all single posts
- * Template Name: 文章模板
+ * Template Name: 文章页模板
  * Template Post Type: post
  * Description: 用于展示单篇文章的模板
  * Version: 1.0
@@ -11,7 +11,7 @@
  */
 
 get_header(); ?>
-
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/single.css">
 <main id="primary" class="site-main">
     <div class="container">
         <?php

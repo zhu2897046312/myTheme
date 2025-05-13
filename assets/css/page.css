@@ -1,0 +1,153 @@
+/* 页面容器 */
+.container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background: #f4b3c2;
+}
+
+/* 页面主体文章容器 */
+article {
+    background: #f4b3c2;
+    padding: 3rem 2rem;
+    margin: 3rem 0;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+/* 标题区域 */
+.entry-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.entry-title {
+    font-size: 2.4rem;
+    color: #222;
+    margin: 0 0 1.5rem;
+    line-height: 1.25;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.entry-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #0073aa;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 内容区域 */
+.entry-content {
+    font-size: 1.06rem;
+    line-height: 1.85;
+    color: #444;
+}
+
+.entry-content p {
+    margin: 1.8em 0;
+}
+
+.entry-content h2 {
+    font-size: 1.7rem;
+    margin: 2.4rem 0 1.4rem;
+    color: #2a2a2a;
+    padding-left: 1.2rem;
+    border-left: 4px solid #0073aa;
+}
+
+.entry-content a {
+    color: #0073aa;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,115,170,0.3);
+    transition: all 0.2s ease;
+}
+
+.entry-content a:hover {
+    color: #005177;
+    border-bottom-color: #0073aa;
+}
+
+/* 分页链接 */
+.page-links {
+    margin: 2.5rem 0;
+    font-size: 0.95rem;
+}
+
+/* 编辑链接 */
+.edit-link {
+    margin-top: 2rem;
+    text-align: right;
+}
+
+.edit-link a {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: #f8f9fa;
+    border-radius: 20px;
+    color: #666;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.edit-link a:hover {
+    background: #e9ecef;
+    transform: translateY(-1px);
+}
+
+/* 评论区域基础样式 */
+.comments-area {
+    margin-top: 4rem;
+    padding: 2.5rem;
+    background: #fafafa;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    article {
+        padding: 2.5rem 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .entry-title {
+        font-size: 2rem;
+    }
+    
+    .entry-content {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .entry-title {
+        font-size: 1.7rem;
+        padding-bottom: 0.8rem;
+    }
+    
+    .entry-title::after {
+        width: 40px;
+        height: 2px;
+    }
+    
+    .entry-content h2 {
+        font-size: 1.4rem;
+        margin: 2rem 0 1rem;
+    }
+    
+    .comments-area {
+        padding: 1.5rem;
+    }
+}
