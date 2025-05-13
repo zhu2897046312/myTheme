@@ -258,3 +258,94 @@ function theme_settings_page() {
     </div>
 <?php
 }
+
+
+
+// 主题激活时创建预设页面
+function create_default_pages() {
+    // 检查是否已创建预设页面
+    $home_page = get_page_by_path('home');
+    $about_page = get_page_by_path('about');
+    $contact_page = get_page_by_path('contact');
+    
+    // 创建首页
+    if (!$home_page) {
+        $home_id = wp_insert_post(array(
+            'post_title'    => '首页',
+            'post_name'     => 'home',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_content'  => '<!-- wp:group --><div class="wp-block-group">这里是首页内容</div><!-- /wp:group -->',
+            'page_template' => 'front-page.php'
+        ));
+        
+        // 设置为静态首页
+        update_option('show_on_front', 'page');
+        update_option('page_on_front', $home_id);
+    }
+    
+    // 创建关于我们页面
+    if (!$about_page) {
+        wp_insert_post(array(
+            'post_title'    => '关于我们',
+            'post_name'     => 'about',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_content'  => '<!-- wp:group --><div class="wp-block-group">这里是关于我们的内容</div><!-- /wp:group -->',
+            'page_template' => 'page-about.php'
+        ));
+    }
+    
+    // 创建联系我们页面
+    if (!$contact_page) {
+        wp_insert_post(array(
+            'post_title'    => '联系我们',
+            'post_name'     => 'contact',
+            'post_status'   => 'publish',
+            'post_type'     => 'page',
+            'post_content'  => '<!-- wp:group --><div class="wp-block-group">这里是联系方式</div><!-- /wp:group -->',
+            'page_template' => 'page-contact.php'
+        ));
+    }
+    
+    // 刷新固定链接
+    flush_rewrite_rules();
+}
+add_action('after_switch_theme', 'create_default_pages');
+
+
+// 创建默认菜单
+function create_default_menu() {
+    // 检查菜单是否已存在
+    $menu_name = '主菜单';
+    $menu_exists = wp_get_nav_menu_object($menu_name);
+    
+    if (!$menu_exists) {
+        $menu_id = wp_create_nav_menu($menu_name);
+        
+        // 添加菜单项
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => '首页',
+            'menu-item-url' => home_url('/'),
+            'menu-item-status' => 'publish'
+        ));
+        
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => '关于我们',
+            'menu-item-url' => home_url('/about/'),
+            'menu-item-status' => 'publish'
+        ));
+        
+        wp_update_nav_menu_item($menu_id, 0, array(
+            'menu-item-title' => '联系我们',
+            'menu-item-url' => home_url('/contact/'),
+            'menu-item-status' => 'publish'
+        ));
+        
+        // 将菜单分配到主菜单位置
+        $locations = get_theme_mod('nav_menu_locations');
+        $locations['primary'] = $menu_id;
+        set_theme_mod('nav_menu_locations', $locations);
+    }
+}
+add_action('after_switch_theme', 'create_default_menu');
