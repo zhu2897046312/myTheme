@@ -1,68 +1,77 @@
-/* 页脚基础样式 */
 .site-footer {
-    width: 100%;
-    background-color: #f5f5f5;
-    color: #333;
-    font-size: 0.9rem;
-    box-sizing: border-box;
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: 50px 0 20px;
 }
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+.footer-top {
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-/* 小工具区域布局 */
-.footer-widgets {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
+.footer-logo {
+    text-align: center;
 }
 
-.footer-widget-area {
+.footer-logo img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.footer-main {
+    padding: 40px 0;
+}
+
+.footer-info {
+    margin-bottom: 30px;
+}
+
+.footer-text {
     margin-bottom: 20px;
 }
 
-.footer-widget-area h4 {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    color: #222;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-}
-
-/* 页脚底部布局 */
-.footer-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
-    border-top: 1px solid #ddd;
-}
-
-.copyright {
-    margin: 10px 0;
-    color: #666;
-}
-
-/* 页脚导航菜单 */
-.footer-navigation ul {
-    display: flex;
+.footer-links {
     list-style: none;
-    margin: 0;
     padding: 0;
-    gap: 20px;
 }
 
-.footer-navigation a {
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #ffffff;
     text-decoration: none;
-    color: #555;
-    transition: color 0.3s ease;
 }
 
-.footer-navigation a:hover {
-    color: #0073aa;
+.footer-links a:hover {
+    color: #cccccc;
+}
+
+.footer-bottom {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.social-links {
+    text-align: center;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #ffffff;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #ffffff;
+    color: #1a1a1a;
 }

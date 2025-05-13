@@ -4,18 +4,29 @@
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
         .site-container {
             display: flex;
             flex-direction: column;
-            height: 100%;
+            flex: 1;
         }
         .site-main {
             flex: 1;
+            width: 100%;
         }
     </style>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/header.css">
 <div class="site-container">
 <header class="site-header alignwide has-base-background-color has-background" style="padding-top:20px;padding-bottom:20px">
     <div class="header-container alignwide">
