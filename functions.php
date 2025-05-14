@@ -279,9 +279,9 @@ function create_default_pages() {
             'page_template' => 'front-page.php'
         ));
         
-        // 设置为静态首页
-        update_option('show_on_front', 'page');
-        update_option('page_on_front', $home_id);
+        // // 设置为静态首页
+        // update_option('show_on_front', 'page');
+        // update_option('page_on_front', $home_id);
     }
     
     // 创建关于我们页面

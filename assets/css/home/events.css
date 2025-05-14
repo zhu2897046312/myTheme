@@ -1,0 +1,63 @@
+.home-events{
+    padding: 60px;
+    background: #fff;
+}
+.home-events__container{
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.home-events__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 40px;
+}
+.home-events__title{
+    font-size: 50px;
+}
+.home-events__contact-btn{
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #0066ff;
+    color: #fff;
+    text-decoration: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: background-color 0.3s;
+}
+.home-events__contact-btn:hover{
+    background-color: #0052cc;
+}
+.home-events__content{
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-events__details{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 20px;
+}
+.home-events__details-top{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.home-events__details-bottom{
+    width: 100%;
+}
+.home-events__detail-cta{
+    color: black;
+    border: none;
+    background-color: transparent;
+    transition: 0.3s;
+    display: inline-block; /* 确保 transform 生效 */
+}
+.home-events__detail-cta:hover{
+    cursor: pointer;
+    transform: scale(1.4); /* 内容放大 10% */
+}

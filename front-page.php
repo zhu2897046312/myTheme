@@ -3,337 +3,171 @@
  * 首页模板
  */
 get_header(); ?>
-
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/front-page.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/home/hero.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/home/brand.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/home/solution.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/home/news.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/home/events.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/home/partners.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/home/merchant.css">
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/home/contact.css">
 <style>
 /* 顶部横幅区域 */
-.hero-banner {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
-    overflow: hidden; /* 防止图片溢出 */
-}
 
-.hero-banner img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 保持图片比例并覆盖整个区域 */
-    z-index: -1; /* 将图片置于文字下方 */
-}
-
-.hero-content {
-    max-width: 800px;
-    padding: 0 20px;
-    position: relative; /* 确保文字内容在正常文档流中 */
-    z-index: 1; /* 将文字内容置于图片上方 */
-}
-
-.hero-content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.hero-content p {
-    font-size: 20px;
-    margin-bottom: 30px;
-}
-
-/* 品牌展示区域 */
-.brand-section {
-    position: relative;
-    padding: 100px 0;
-    background: url('<?php echo get_theme_file_uri('assets/images/crystal-ball.jpg'); ?>');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-}
-
-.brand-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.brand-title {
-    font-size: 36px;
-    margin-bottom: 30px;
-}
-
-.brand-description {
-    font-size: 18px;
-    margin-bottom: 40px;
-}
-
-.brand-button {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: #0066ff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.brand-button:hover {
-    background-color: #0052cc;
-}
-
-/* 数据统计区域 */
-.stats-section {
-    padding: 50px 0;
-    text-align: center;
-}
-
-.stats-item {
-    margin: 20px;
-    display: inline-block;
-}
-
-.stats-number {
-    font-size: 36px;
-    font-weight: bold;
-    color: #333;
-}
-
-.stats-label {
-    font-size: 16px;
-    color: #666;
-}
-
-
-/* 顶部个人展示区 */
-.personal-section {
-    height: 100vh;
-    background: #f8f9fa;
-    position: relative;
-    overflow: hidden;
-}
-
-.personal-content {
-    position: absolute;
-    left: 50px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-}
-
-.personal-title {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.personal-desc {
-    font-size: 24px;
-    margin-bottom: 30px;
-}
-
-.personal-image {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 60%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* 品牌展示区 */
-.brand-showcase {
-    padding: 100px 0;
-    background: linear-gradient(135deg, #8B0000 0%, #FF0000 100%);
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-.brand-showcase::before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    right: -10%;
-    top: 0;
-    background: rgba(255,255,255,0.1);
-    transform: skewX(-20deg);
-}
-
-.brand-logo {
-    max-width: 200px;
-    margin-bottom: 30px;
-}
-
-/* 最新活动区 */
-.latest-activities {
-    padding: 80px 0;
-    background: #fff;
-}
-
-.activity-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.activity-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.activity-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-.activity-content {
-    padding: 20px;
-}
-
-.activity-title {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.activity-desc {
-    color: #666;
-    margin-bottom: 15px;
-}
-
-/* 案例展示区 */
-.case-showcase {
-    padding: 60px 0;
-    background: #f8f9fa;
-}
-
-.case-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 40px;
-}
-
-.case-item {
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s;
-}
-
-.case-item:hover {
-    transform: translateY(-5px);
-}
-
-.case-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.case-content {
-    padding: 15px;
-}
-
-.case-title {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.case-desc {
-    font-size: 14px;
-    color: #666;
-}
-
-.view-more {
-    display: inline-block;
-    padding: 10px 25px;
-    background: #0066ff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 10px;
-}
 </style>
 
 <!-- 顶部横幅 -->
-<section class="hero-banner">
-    <img src="<?php echo get_theme_file_uri('assets/images/bg_1.png'); ?>" alt="">
-    <div class="hero-content">
-        <h1>价值主张标题</h1>
-        <p>行业解决方案第一品牌</p>
+<section class="home-hero">
+    <img src="<?php echo get_theme_file_uri('assets/images/bg_1.png'); ?>" alt="" class="home-hero__bg">
+    <div class="home-hero__content">
+        <h1 class="home-hero__title">价值主张标题</h1>
+        <p class="home-hero__subtitle">行业解决方案第一品牌</p>
     </div>
 </section>
 
 <!-- 品牌展示 -->
-<section class="hero-banner">
-    <img src="<?php echo get_theme_file_uri('assets/images/bg_2.png');?>" alt="">
-    <div class="hero-content">
-        <h2 class="brand-title">品牌口号</h2>
-        <p class="brand-description">品牌口号品牌口号</p>
-        <a href="#" class="brand-button">查看详情</a>
+<section class="home-brand-showcase">
+    <img src="<?php echo get_theme_file_uri('assets/images/bg_2.png');?>" alt="" class="home-brand-showcase__bg">
+    <div class="home-brand-showcase__content">
+        <div class="home-brand-showcase__left">
+            <h2 class="home-brand-showcase__slogan">品牌口号</h2>
+            <p class="home-brand-showcase__desc">品牌口号品牌口号</p>
+            <a href="#" class="home-brand-showcase__btn">联系我们</a>
+        </div>
+        <div class="home-brand-showcase__right">
+            <div class="home-brand-showcase__intro">
+                <p class="home-brand-showcase__intro-text">内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍</p>
+                <a href="" class="home-brand-showcase__cta-link">查看详情→</a>
+            </div>
+            <div class="home-brand-showcase__stats">
+                <div class="home-brand-showcase__stat-item home-brand-showcase__stat-item--large">
+                    <h1 class="home-brand-showcase__stat-number">30+年</h1>
+                    <p class="home-brand-showcase__stat-label">of beauty industry experience</p>
+                </div>
+                <div class="home-brand-showcase__stat-group">
+                    <div class="home-brand-showcase__stat-item home-brand-showcase__stat-item--small">
+                        <h1 class="home-brand-showcase__stat-number">24/7</h1>
+                        <p class="home-brand-showcase__stat-label">technical support& free online training</p>
+                    </div>
+                    <div class="home-brand-showcase__stat-item home-brand-showcase__stat-item--small">
+                        <h1 class="home-brand-showcase__stat-number">50+</h1>
+                        <p class="home-brand-showcase__stat-label">professional R&D teams</p>
+                    </div>
+                </div>
+            </div>
+            <div class="home-brand-showcase__stat-item home-brand-showcase__stat-item--large">
+                <h1 class="home-brand-showcase__stat-number">3</h1>
+                <p class="home-brand-showcase__stat-label">factories& a million-level dust-free workshop</p>
+            </div>
+            <div class="home-brand-showcase__badges">
+                <img src="<?php echo get_theme_file_uri('assets/images/icon.svg');?>" alt="认证标志" class="home-brand-showcase__badge">
+                <img src="<?php echo get_theme_file_uri('assets/images/icon.svg');?>" alt="认证标志" class="home-brand-showcase__badge">
+                <img src="<?php echo get_theme_file_uri('assets/images/icon.svg');?>" alt="认证标志" class="home-brand-showcase__badge">
+                <img src="<?php echo get_theme_file_uri('assets/images/icon.svg');?>" alt="认证标志" class="home-brand-showcase__badge">
+                <img src="<?php echo get_theme_file_uri('assets/images/icon.svg');?>" alt="认证标志" class="home-brand-showcase__badge">
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- 数据统计 -->
-<section class="hero-banner">
-    <img src="<?php echo get_theme_file_uri('assets/images/bg_3.png');?>" alt="">
-    <div class="hero-content">
-        <div class="stats-item">
-            <div class="stats-number">20+</div>
-            <div class="stats-label">行业经验</div>
+<section class="home-solution">
+    <img src="<?php echo get_theme_file_uri('assets/images/bg_3.png');?>" alt="" class="home-solution__bg">
+    <div class="home-solution__content">
+        <div class="home-solution__left">
+            <div class="home-solution__solutions">
+                <h1 class="home-solution__industry">美容行业</h1>
+                <h1 class="home-solution__title">解决方案</h1>
+                <button class="home-solution__more-cta">更多方案</button>
+            </div>
+            <div class="home-solution__items">
+                <h2 class="home-solution__item">祛痘</h2>
+                <h2 class="home-solution__item">祛痘</h2>
+                <h2 class="home-solution__item">祛痘</h2>
+            </div>
         </div>
-        <div class="stats-item">
-            <div class="stats-number">24/7</div>
-            <div class="stats-label">专业服务</div>
-        </div>
-        <div class="stats-item">
-            <div class="stats-number">50+</div>
-            <div class="stats-label">专业团队</div>
+        <div class="home-solution__right">
+            <div class="home-solution__featured">
+                <h1 class="home-solution__featured-title">祛痘</h1>
+                <p class="home-solution__featured-desc">说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明</p>
+            </div>
+            <a class="home-solution__detail-btn">查看详情</a>
         </div>
     </div>
-</section>
-
-<!-- 顶部个人展示区 -->
-<section class="personal-section">
-    <div class="personal-content">
-        <h1 class="personal-title">美丽时光</h1>
-        <p class="personal-desc">2023/7/8</p>
-        <a href="#" class="view-more">了解更多</a>
-    </div>
-    <img src="<?php echo get_theme_file_uri('assets/images/bg_3.png'); ?>" alt="个人展示" class="personal-image">
 </section>
 
 <!-- 品牌展示区 -->
-<section class="brand-showcase">
-    <div class="container">
-        <img src="<?php echo get_theme_file_uri('assets/images/bg_3.png'); ?>" alt="品牌LOGO" class="brand-logo">
-        <h2>品牌LOGO</h2>
-        <p>产品介绍</p>
+<section class="home-brand">
+    <img src="<?php echo get_theme_file_uri('assets/images/bg_4.png'); ?>" alt="品牌LOGO" class="home-brand__logo">
+    <div class="home-brand__container ">
+        <h2 class="home-brand__name">品牌LOGO</h2>
+        <p class="home-brand__intro">产品介绍</p>
     </div>
 </section>
 
 <!-- 最新活动区 -->
-<section class="latest-activities">
-    <div class="container">
-        <div>
-            <h2>展会活动</h2>
-            <button>联系我们</button>
+<section class="home-events">
+    <div class="home-events__container">
+        <div class="home-events__header">
+            <h2 class="home-events__title">展会活动</h2>
+            <a class="home-events__contact-btn">联系我们</a>
         </div>
-        <div class="activity-grid">
-            <div class="activity-item">
-                <img src="<?php echo get_theme_file_uri('assets/images/activity1.jpg'); ?>" alt="活动1" class="activity-image">
-                <div class="activity-content">
-                    <h3 class="activity-title">活动标题</h3>
-                    <p class="activity-desc">活动描述文字活动描述文字活动描述文字</p>
-                    <a href="#" class="view-more">查看详情</a>
+        <div class="home-events__content">
+            <div class="home-events__image-wrapper">
+                <img src="<?php echo get_theme_file_uri('assets/images/active.jpg'); ?>" alt="活动1" class="home-events__image">
+            </div>
+            <div class="home-events__details">
+                <div class="home-events__details-top">
+                    <h1 class="home-events__event-title">标题标题标题标题标题标题标题标题标题标题</h1>
+                    <p class="home-events__event-desc">内容介绍内容介绍内容介绍内容介绍内容介绍</p>
+                </div>
+                <div class="home-events__details-bottom">
+                    <button class="home-events__detail-cta">查看详情</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="home-news">
+    <div class="home-news__content">
+        <div class="home-news__header">
+            <h2 class="home-news__title">新闻中心</h2>
+            <a class="home-news__contact-btn">联系我们</a>
+        </div>
+        <div class="home-news__grid">
+            <?php for($i = 1; $i <= 4; $i++) : ?>
+            <div class="home-news__item">
+                
+                    <img src="<?php echo get_theme_file_uri("assets/images/active.jpg"); ?>" alt="" class="home-news__image">
+                <div class="home-news__content-wrapper">
+                    <h3 class="home-news__item-title">案例标题</h3>
+                    <p class="home-news__item-desc">案例简介案例简介案例简介</p>
+                </div>
+            </div>
+            <?php endfor; ?>
+        </div>
+    </div>
+</section>
+
+<section class="home-merchant-recommend">
+    <div class="home-merchant-recommend__container">
+        <div class="home-merchant-recommend__header">
+            <h1 class="home-merchant-recommend__title">数千万商家的选择</h1>
+        </div>
+        <div class="home-merchant-recommend__testimonials">
+            <div class="home-merchant-recommend__testimonial">
+                <img src="<?php echo get_theme_file_uri("assets/images/binsss.png"); ?>" alt="商家头像" class="home-merchant-recommend__avatar">
+                <div class="home-merchant-recommend__content">
+                    <p class="home-merchant-recommend__quote">内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍</p>
+                    <span class="home-merchant-recommend__author">--姓名</span>
+                </div>
+            </div>
+            <div class="home-merchant-recommend__testimonial">
+                <img src="<?php echo get_theme_file_uri("assets/images/binsss.png"); ?>" alt="商家头像" class="home-merchant-recommend__avatar">
+                <div class="home-merchant-recommend__content">
+                    <p class="home-merchant-recommend__quote">内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍</p>
+                    <span class="home-merchant-recommend__author">--姓名</span>
                 </div>
             </div>
         </div>
@@ -341,44 +175,54 @@ get_header(); ?>
 </section>
 
 <!-- 案例展示区 -->
-<section class="case-showcase">
-    <div class="container">
-        <div>
-            <h2>新闻中心</h2>
-            <button>联系我们</button>
+<section class="home-partners">
+    <div class="home-partners__container ">
+        <div class="home-partners__header">
+            <h2 class="home-partners__title">合作品牌</h2>
+            <a class="home-partners__contact-btn">联系我们</a>
         </div>
-        <div class="case-grid">
-            <?php for($i = 1; $i <= 4; $i++) : ?>
-            <div class="case-item">
-                <img src="<?php echo get_theme_file_uri("assets/images/case{$i}.jpg"); ?>" alt="案例<?php echo $i; ?>" class="case-image">
-                <div class="case-content">
-                    <h3 class="case-title">案例标题</h3>
-                    <p class="case-desc">案例简介案例简介案例简介</p>
-                </div>
+        <div class="home-partners__grid">
+            <?php for($i = 1; $i <= 10; $i++) : ?>
+            <div class="home-partners__item">
+                <img src="<?php echo get_theme_file_uri("assets/images/logo.jpg"); ?>" alt="案例<?php echo $i; ?>" class="home-partners__image">
             </div>
             <?php endfor; ?>
         </div>
     </div>
 </section>
-
-
-<section class="case-showcase">
-    <div class="container">
-        <div>
-            <h2>合作品牌</h2>
-            <button>联系我们</button>
+<section class="home-contact">
+    <img src="<?php echo get_theme_file_uri('assets/images/bg_5.png');?>" alt="" class="home-contact__bg">
+    <div class="home-contact__content">
+        <div class="home-contact__header">
+            <h1 class="home-contact__title">联系我们</h1>
         </div>
-        <div class="case-grid">
-            <?php for($i = 1; $i <= 4; $i++) : ?>
-            <div class="case-item">
-                <img src="<?php echo get_theme_file_uri("assets/images/case{$i}.jpg"); ?>" alt="案例<?php echo $i; ?>" class="case-image">
-                <div class="case-content">
-                    <h3 class="case-title">案例标题</h3>
-                    <p class="case-desc">案例简介案例简介案例简介</p>
+       <div class="home-contact__form-wrapper">
+            <form class="home-contact__form" action="#">
+                <div class="home-contact__form-group-1">
+                <label class="home-contact__form-group" title="姓名">
+                    <input type="text" placeholder="姓名" class="home-contact__input">
+                </label>
+                <label class="home-contact__form-group" title="电话">
+                    <input type="text" placeholder="电话" class="home-contact__input">
+                </label>
+                <label class="home-contact__form-group" title="邮箱">
+                    <input type="text" placeholder="邮箱" class="home-contact__input">
+                </label>
+                <label class="home-contact__form-group" title="企业">
+                    <input type="text" placeholder="企业" class="home-contact__input">
+                </label>
+                <label class="home-contact__form-group" title="城市">
+                    <input type="text" placeholder="城市" class="home-contact__input">
+                </label>
                 </div>
-            </div>
-            <?php endfor; ?>
-        </div>
+                <div class="home-contact__form-group-2">
+                <label title="内容">
+                    <textarea placeholder="内容" class="home-contact__input-2"></textarea>
+                </label>
+                </div>  
+            </form>
+       </div>
+       <button class="home-contact__submit-btn">提交</button>
     </div>
 </section>
 
