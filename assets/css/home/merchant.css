@@ -1,0 +1,34 @@
+.home-merchant-recommend{
+    padding: 60px;
+    background: #fff;
+}
+.home-merchant-recommend__container{
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.home-merchant-recommend__header{
+    text-align: center;
+    padding-bottom: 40px;
+}
+.home-merchant-recommend__title{
+    font-size: 50px;
+}
+.home-merchant-recommend__testimonials{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+.home-merchant-recommend__testimonial{
+    display: flex;
+}
+.home-merchant-recommend__content{
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+}
+.home-merchant-recommend__content span{
+    text-align: end;
+}
+

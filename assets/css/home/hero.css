@@ -1,0 +1,51 @@
+.home-hero {
+    position: relative;
+    height: 1028px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    overflow: hidden; /* 防止图片溢出 */
+}
+
+.home-hero__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持图片比例并覆盖整个区域 */
+    z-index: -1; /* 将图片置于文字下方 */
+}
+
+.home-hero__content {
+    padding: 0 20px;
+    position: relative; /* 确保文字内容在正常文档流中 */
+    z-index: 1; /* 将文字内容置于图片上方 */
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* 向下偏移 */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* 还原到原位 */
+    }
+}
+
+.home-hero__title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-out forwards; /* 添加淡入动画 */
+}
+
+.home-hero__subtitle {
+    font-size: 20px;
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease-out forwards; /* 添加淡入动画，稍微延迟 */
+    animation-delay: 0.5s; /* 延迟 0.5 秒后开始动画 */
+}

@@ -1,0 +1,128 @@
+.home-brand-showcase{
+    position: relative;
+    height: 1028px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    overflow: hidden; /* 防止图片溢出 */
+}
+
+.home-brand-showcase__bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持图片比例并覆盖整个区域 */
+    z-index: -1; /* 将图片置于文字下方 */
+}
+
+.home-brand-showcase__content{
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    width: 1400px;
+    height: 600px;
+}
+
+.home-brand-showcase__slogan{
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+.home-brand-showcase__desc{
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.home-brand-showcase__btn{
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #0066ff;
+    color: #fff;
+    text-decoration: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.home-brand-showcase__btn:hover {
+    background-color: #0052cc;
+}
+
+.home-brand-showcase__right{
+    color: white;
+}
+
+.home-brand-showcase__intro{
+    max-width: 500px;
+    margin-bottom: 30px;
+}
+
+.home-brand-showcase__cta-link{
+    color: white;
+    border: none;
+    background-color: transparent;
+    transition: 0.3s;
+    display: inline-block; /* 确保 transform 生效 */
+}
+
+.home-brand-showcase__cta-link:hover {
+    cursor: pointer;
+    transform: scale(1.4); /* 内容放大 10% */
+}   
+
+.home-brand-showcase__badges{
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.home-brand-showcase__stat-item--large{
+    margin-left: 20px;
+}
+.home-brand-showcase__stat-number{
+    margin: 0;
+}
+.home-brand-showcase__stat-label{
+    margin-top: 5px;
+}
+
+.home-brand-showcase__stat-item--small{
+    margin-left: 200px;
+}
+
+.home-brand{
+    position: relative;
+    height: 1028px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    overflow: hidden; /* 防止图片溢出 */
+}
+
+.home-brand__logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持图片比例并覆盖整个区域 */
+    z-index: -1; /* 将图片置于文字下方 */
+}
+.home-brand__container {
+    padding: 0 20px;
+    position: relative; /* 确保文字内容在正常文档流中 */
+    z-index: 1; /* 将文字内容置于图片上方 */
+    margin-right: 200px;
+    text-align: center;
+}
+.home-brand__name{
+    font-size: 40px;
+}

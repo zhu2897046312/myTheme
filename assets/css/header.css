@@ -1,0 +1,152 @@
+
+/* Header 基础样式 */
+.site-header {
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 100px;
+    padding: 0 20px;
+}
+
+/* 左侧Logo区域样式 */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.site-branding {
+    display: flex;
+    align-items: center;
+}
+
+.site-logo img {
+    max-height: 60px;
+    width: auto;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.site-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 右侧功能区样式 */
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* 主导航菜单样式 */
+.main-navigation ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+}
+
+.main-navigation a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.main-navigation a:hover {
+    color: #0073aa;
+}
+
+/* 语言切换器样式 */
+.language-switcher select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 搜索表单样式 */
+.header-search {
+    position: relative;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-field {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 200px;
+    transition: width 0.3s ease;
+}
+
+.search-field:focus {
+    width: 250px;
+    outline: none;
+    border-color: #0073aa;
+}
+
+.search-submit {
+    background: none;
+    border: none;
+    margin-left: -30px;
+    cursor: pointer;
+    color: #555;
+}
+
+.search-submit:hover {
+    color: #0073aa;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .header-left, .header-right {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .header-right {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .main-navigation ul {
+        gap: 15px;
+    }
+    
+    .language-switcher, .header-search {
+        margin: 10px 0 0 0 !important;
+    }
+    
+    .search-field {
+        width: 150px;
+    }
+    
+    .search-field:focus {
+        width: 180px;
+    }
+}

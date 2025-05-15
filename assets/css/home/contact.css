@@ -1,0 +1,72 @@
+.home-contact {
+    position: relative;
+    height: 1028px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    overflow: hidden; /* 防止图片溢出 */
+}
+
+.home-contact__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持图片比例并覆盖整个区域 */
+    z-index: -1; /* 将图片置于文字下方 */
+}
+
+.home-contact__content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    height: 800px;
+    border-radius: 30px;
+}
+.home-contact__title {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.home-contact__form-group-1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+}
+.home-contact__form-group-1 input{
+    max-width: 500px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+}
+.home-contact__form-group-2{
+    margin-top: 30px;
+}
+.home-contact__input-2 {
+    height: 200px;
+    width: 100%; /* 可根据需要调整宽度 */
+    box-sizing: border-box; /* 确保内边距和边框不影响元素的总高度 */
+    border: none;
+    border-radius: 10px;
+}
+
+.home-contact__submit-btn{
+    margin-top: 20px;
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #0066ff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+.home-contact__submit-btn:hover{
+    background-color: #0052cc;
+}
