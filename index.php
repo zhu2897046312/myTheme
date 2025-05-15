@@ -96,21 +96,49 @@ get_header(); ?>
     <div class="home-events__container">
         <div class="home-events__header">
             <h2 class="home-events__title">展会活动</h2>
-            <a class="home-events__contact-btn">联系我们</a>
+            <a class="home-events__contact-btn" href="<?php echo esc_url(get_permalink(get_page_by_path('contact'))); ?>">联系我们</a>
         </div>
+
         <div class="home-events__content">
-            <div class="home-events__image-wrapper">
-                <img src="<?php echo get_theme_file_uri('assets/images/active.jpg'); ?>" alt="活动1" class="home-events__image">
-            </div>
-            <div class="home-events__details">
-                <div class="home-events__details-top">
-                    <h1 class="home-events__event-title">标题标题标题标题标题标题标题标题标题标题</h1>
-                    <p class="home-events__event-desc">内容介绍内容介绍内容介绍内容介绍内容介绍</p>
-                </div>
-                <div class="home-events__details-bottom">
-                    <button class="home-events__detail-cta">查看详情</button>
-                </div>
-            </div>
+            <?php
+            // WP_Query 用来获取 News & Events 类型的文章
+            $args = array(
+                'post_type' => 'news_event', // 查询 news_event 文章类型
+                'posts_per_page' => 1, // 可设置为你需要的数量，1 代表只显示一篇
+            );
+            $query = new WP_Query($args);
+
+            // 循环输出查询结果
+            if ($query->have_posts()) :
+                while ($query->have_posts()) : $query->the_post();
+            ?>
+                    <div class="home-events__image-wrapper">
+                        <?php
+                        // 获取上传的活动图片
+                        $event_image_url = get_post_meta(get_the_ID(), '_event_image', true);
+
+                        if ($event_image_url) : ?>
+                                <img src="<?php echo esc_url($event_image_url); ?>" alt="活动图片" class="home-events__image">
+                        <?php endif; ?>
+                    </div>
+                    <div class="home-events__details">
+                        <div class="home-events__details-top">
+                            <h1 class="home-events__event-title"><?php the_title(); ?></h1>
+                            <p class="home-events__event-desc"><?php the_excerpt(); ?></p>
+                        </div>
+                        <div class="home-events__details-bottom">
+                            <a href="<?php the_permalink(); ?>" class="home-events__detail-cta">查看详情</a>
+                        </div>
+                    </div>
+            <?php 
+                endwhile;
+            else :
+                echo '<p>没有找到相关的展会活动。</p>';
+            endif;
+
+            // 重置查询
+            wp_reset_postdata();
+            ?>
         </div>
     </div>
 </section>

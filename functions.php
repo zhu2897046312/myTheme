@@ -237,9 +237,86 @@ function enzoeys_custom_post_types() {
             'public' => true,
             'has_archive' => true,
             'rewrite' => array('slug' => 'info-center'),
-            'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+            'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
             'menu_icon' => 'dashicons-megaphone',
         )
     );
 }
 add_action('init', 'enzoeys_custom_post_types');
+
+
+// 在编辑页面添加自定义字段
+function add_custom_meta_boxes() {
+    add_meta_box(
+        'event_image',           // Meta box ID
+        '活动图片',               // 标题
+        'event_image_meta_box',  // 回调函数
+        'news_event',            // 自定义文章类型
+        'normal',                // 显示位置
+        'high'                   // 显示优先级
+    );
+}
+add_action('add_meta_boxes', 'add_custom_meta_boxes');
+
+// 自定义字段 HTML 内容
+function event_image_meta_box($post) {
+    // 获取当前图片的 URL（如果有的话）
+    $event_image_url = get_post_meta($post->ID, '_event_image', true);
+    ?>
+    <label for="event_image_url">选择活动图片：</label>
+    <input type="text" id="event_image_url" name="event_image_url" value="<?php echo esc_attr($event_image_url); ?>" style="width: 80%;" />
+    <input type="button" class="button" value="上传图片" id="upload_event_image_button" />
+    <p class="description">点击按钮上传或选择活动图片</p>
+
+    <script type="text/javascript">
+         jQuery(document).ready(function($){
+             var mediaUploader;
+             
+             // 按钮点击事件
+             $('#upload_event_image_button').click(function(e) {
+                 e.preventDefault();
+                 
+                 // 如果媒体框已经存在，则重新打开
+                 if (mediaUploader) {
+                     mediaUploader.open();
+                     return;
+                 }
+ 
+                 // 创建媒体框
+                 mediaUploader = wp.media.frames.file_frame = wp.media({
+                     title: '选择活动图片',
+                     button: {
+                         text: '选择图片'
+                     },
+                     multiple: false // 只允许选择一张图片
+                 });
+ 
+                 // 选择图片后的事件
+                 mediaUploader.on('select', function() {
+                     var attachment = mediaUploader.state().get('selection').first().toJSON();
+                     // 将选中的图片URL填入输入框
+                     $('#event_image_url').val(attachment.url);
+                 });
+ 
+                 // 打开媒体框
+                 mediaUploader.open();
+             });
+         });
+     </script>
+    <?php
+}
+
+// 保存自定义字段的值
+function save_event_image_meta($post_id) {
+    // 检查是否为自动保存
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
+
+    // 检查权限
+    if ('news_event' != $_POST['post_type']) return $post_id;
+
+    // 保存图片 URL
+    if (isset($_POST['event_image_url'])) {
+        update_post_meta($post_id, '_event_image', sanitize_text_field($_POST['event_image_url']));
+    }
+}
+add_action('save_post', 'save_event_image_meta');
