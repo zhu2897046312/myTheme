@@ -11,8 +11,12 @@
         <!-- Left Logo Area -->
         <div class="header-left">
             <div class="site-branding">
-                <?php if (has_custom_logo()): ?>
-                    <div class="site-logo"><?php the_custom_logo(); ?></div>
+                <?php 
+                $footer_logo = get_option('footer_logo');
+                if ($footer_logo) : ?>
+                    <img src="<?php echo esc_url($footer_logo); ?>" alt="Footer Logo">
+                <?php else : ?>
+                    <p>没有设置 Footer Logo。</p>
                 <?php endif; ?>
                 
                 <div class="site-title-group">

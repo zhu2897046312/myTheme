@@ -32,6 +32,9 @@
     text-align: center;
     margin-bottom: 30px;
 }
+.footer-logo{
+    padding-left: 130px;
+}
 .footer-icon {
     display: flex;
     justify-content: center;

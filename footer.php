@@ -53,11 +53,13 @@
             </div>
         </div>
     </div>
-    <div class="logo">
+    <div class="footer-logo" style="background-color:#ffffff">
         <?php 
         $footer_logo = get_option('footer_logo');
         if ($footer_logo) : ?>
             <img src="<?php echo esc_url($footer_logo); ?>" alt="Footer Logo">
+        <?php else : ?>
+            <p>没有设置 Footer Logo。</p>
         <?php endif; ?>
     </div>
     <!-- Footer Main -->

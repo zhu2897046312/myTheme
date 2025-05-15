@@ -35,6 +35,14 @@ function enzoeys_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'enzoeys_enqueue_styles');
 
+// 加载后台媒体库脚本（确保只在后台页面加载）
+function enqueue_admin_media() {
+    // 确保只在主题设置页面加载
+    if (isset($_GET['page']) && $_GET['page'] === 'theme-settings') {
+        wp_enqueue_media(); // 确保加载媒体库
+    }
+}
+add_action('admin_enqueue_scripts', 'enqueue_admin_media');
 
 // 添加主题设置菜单
 function theme_settings_menu() {
@@ -68,6 +76,9 @@ function theme_register_settings() {
         register_setting('theme-settings-group', "service_desc_$i");
         register_setting('theme-settings-group', "service_icon_$i");
     }
+
+    // 注册 footer logo
+    register_setting('theme-settings-group', 'footer_logo');
 }
 add_action('admin_init', 'theme_register_settings');
 
@@ -139,10 +150,47 @@ function theme_settings_page() {
                 </tr>
             </table>
             <?php endfor; ?>
-            
+
+            <h3>Footer Logo 上传</h3>
+            <table class="form-table">
+                <tr>
+                    <th>上传 Footer Logo</th>
+                    <td>
+                        <input type="text" name="footer_logo" value="<?php echo esc_attr(get_option('footer_logo')); ?>" />
+                        <input type="button" class="button" value="上传 Logo" id="upload_logo_button" />
+                        <p class="description">上传或粘贴 Footer Logo 图片的 URL</p>
+                    </td>
+                </tr>
+            </table>
+
             <?php submit_button(); ?>
         </form>
     </div>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('#upload_logo_button').click(function(e) {
+                e.preventDefault();
+
+                // 打开媒体库
+                var mediaUploader = wp.media.frames.file_frame = wp.media({
+                    title: '选择 Logo 图片',
+                    button: {
+                        text: '选择 Logo'
+                    },
+                    multiple: false // 不允许选择多张图片
+                });
+
+                mediaUploader.on('select', function() {
+                    var attachment = mediaUploader.state().get('selection').first().toJSON();
+                    // 设置输入框的值为选中的图片 URL
+                    $('input[name="footer_logo"]').val(attachment.url);
+                });
+
+                mediaUploader.open();
+            });
+        });
+    </script>
 <?php
 }
 
