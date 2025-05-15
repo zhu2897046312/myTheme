@@ -152,12 +152,38 @@ get_header(); ?>
         <div class="home-news__grid">
             <?php for($i = 1; $i <= 4; $i++) : ?>
             <div class="home-news__item">
-                
-                    <img src="<?php echo get_theme_file_uri("assets/images/active.jpg"); ?>" alt="" class="home-news__image">
-                <div class="home-news__content-wrapper">
-                    <h3 class="home-news__item-title">案例标题</h3>
-                    <p class="home-news__item-desc">案例简介案例简介案例简介</p>
-                </div>
+                <?php
+                // WP_Query 用来获取 News & Events 类型的文章
+                $args = array(
+                    'post_type' => 'news_event', // 查询 news_event 文章类型
+                    'posts_per_page' => 4, // 可设置为你需要的数量，1 代表只显示一篇
+                );
+                $query = new WP_Query($args);
+
+                // 循环输出查询结果
+                if ($query->have_posts()) :
+                    while ($query->have_posts()) : $query->the_post();
+                ?>
+                        <?php
+                        // 获取上传的活动图片
+                        $event_image_url = get_post_meta(get_the_ID(), '_event_image', true);
+
+                        if ($event_image_url) : ?>
+                                <img src="<?php echo esc_url($event_image_url); ?>" alt="活动图片" class="home-news__image">
+                        <?php endif; ?>
+                        <div class="home-news__content-wrapper">
+                            <h1 class="home-news__item-title"><?php the_title(); ?></h1>
+                            <p class="home-news__item-desc"><?php the_excerpt(); ?></p>
+                        </div>
+                <?php 
+                    endwhile;
+                else :
+                    echo '<p>没有找到相关的展会活动。</p>';
+                endif;
+
+                // 重置查询
+                wp_reset_postdata();
+                ?>
             </div>
             <?php endfor; ?>
         </div>
