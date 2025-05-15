@@ -34,7 +34,11 @@
     display: flex;
     justify-content: space-between;
 }
-
+.home-events__image{
+    max-width: 1000px;
+    min-width: 1000px;
+    height: auto;
+}
 .home-events__details{
    display: flex;
    flex-direction: column;
