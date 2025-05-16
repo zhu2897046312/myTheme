@@ -6,15 +6,10 @@
     register_nav_menus(array(
         'primary' => __('主导航菜单', 'my-theme'),
         'footer'  => __('页脚菜单', 'my-theme'),
+        'footer_menu_quick_links' => '快捷链接菜单',
+        'footer_menu_product_series' => '产品系列菜单',
+        'footer_menu_info_center' => '信息中心菜单',
     ));
-
-    register_nav_menus(
-        array(
-            'footer_menu_quick_links' => '快捷链接菜单',
-            'footer_menu_product_series' => '产品系列菜单',
-            'footer_menu_info_center' => '信息中心菜单',
-        )
-    );
 }
 add_action('after_setup_theme', 'my_theme_register_menus');
 
@@ -85,6 +80,16 @@ function theme_register_settings() {
 
     // 注册 footer logo
     register_setting('theme-settings-group', 'footer_logo');
+
+    // 品牌口号设置
+    register_setting('theme-settings-group', 'brand_slogan_title');
+    register_setting('theme-settings-group', 'brand_slogan_desc');
+    register_setting('theme-settings-group', 'brand_intro_text');
+    for($i = 1; $i <= 4; $i++) {
+        register_setting('theme-settings-group', "brand_stat_number_$i");
+    }
+    register_setting('theme-settings-group', 'brand_cta_link');
+
 }
 add_action('admin_init', 'theme_register_settings');
 
@@ -166,6 +171,33 @@ function theme_settings_page() {
                         <input type="button" class="button" value="上传 Logo" id="upload_logo_button" />
                         <p class="description">上传或粘贴 Footer Logo 图片的 URL</p>
                     </td>
+                </tr>
+            </table>
+
+
+            <h3>品牌口号设置</h3>
+            <table class="form-table">
+                <tr>
+                    <th>品牌口号标题</th>
+                    <td><input type="text" name="brand_slogan_title" value="<?php echo esc_attr(get_option('brand_slogan_title')); ?>" /></td>
+                </tr>
+                <tr>
+                    <th>品牌口号描述</th>
+                    <td><textarea name="brand_slogan_desc" rows="3" cols="60"><?php echo esc_attr(get_option('brand_slogan_desc')); ?></textarea></td>
+                </tr>
+                <tr>
+                    <th>品牌介绍文字</th>
+                    <td><textarea name="brand_intro_text" rows="4" cols="60"><?php echo esc_attr(get_option('brand_intro_text')); ?></textarea></td>
+                </tr>
+                <?php for($i = 1; $i <= 4; $i++) : ?>
+                    <tr>
+                        <th>品牌数字相关内容 <?php echo $i; ?></th>
+                        <td><input type="text" name="brand_stat_number_<?php echo $i; ?>" value="<?php echo esc_attr(get_option("brand_stat_number_$i")); ?>" /></td>
+                    </tr>
+                <?php endfor; ?>
+                <tr>
+                    <th>查看详情链接</th>
+                    <td><input type="url" name="brand_cta_link" value="<?php echo esc_attr(get_option('brand_cta_link')); ?>" /></td>
                 </tr>
             </table>
 

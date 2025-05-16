@@ -17,33 +17,35 @@ get_header(); ?>
     <img src="<?php echo get_theme_file_uri('assets/images/bg_2.png');?>" alt="" class="home-brand-showcase__bg">
     <div class="home-brand-showcase__content">
         <div class="home-brand-showcase__left">
-            <h2 class="home-brand-showcase__slogan">品牌口号</h2>
-            <p class="home-brand-showcase__desc">品牌口号品牌口号</p>
+            <h2 class="home-brand-showcase__slogan"><?php echo esc_html(get_option('brand_slogan_title')); ?></h2>
+            <h3 class="home-brand-showcase__desc"><?php echo esc_html(get_option('brand_slogan_desc')); ?></h3>
             <a href="#" class="home-brand-showcase__btn">联系我们</a>
         </div>
         <div class="home-brand-showcase__right">
             <div class="home-brand-showcase__intro">
-                <p class="home-brand-showcase__intro-text">内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍</p>
-                <a href="" class="home-brand-showcase__cta-link">查看详情→</a>
+                <?php echo esc_html(get_option('brand_intro_text')); ?>
+                <div>
+                    <a href="" class="home-brand-showcase__cta-link">查看详情→</a>
+                </div>
             </div>
             <div class="home-brand-showcase__stats">
                 <div class="home-brand-showcase__stat-item home-brand-showcase__stat-item--large">
-                    <h1 class="home-brand-showcase__stat-number">30+年</h1>
+                    <h1 class="home-brand-showcase__stat-number"><?php echo esc_html(get_option('brand_stat_number_1')); ?></h1>
                     <p class="home-brand-showcase__stat-label">of beauty industry experience</p>
                 </div>
                 <div class="home-brand-showcase__stat-group">
                     <div class="home-brand-showcase__stat-item home-brand-showcase__stat-item--small">
-                        <h1 class="home-brand-showcase__stat-number">24/7</h1>
+                        <h1 class="home-brand-showcase__stat-number"><?php echo esc_html(get_option('brand_stat_number_2')); ?></h1>
                         <p class="home-brand-showcase__stat-label">technical support& free online training</p>
                     </div>
                     <div class="home-brand-showcase__stat-item home-brand-showcase__stat-item--small">
-                        <h1 class="home-brand-showcase__stat-number">50+</h1>
+                        <h1 class="home-brand-showcase__stat-number"><?php echo esc_html(get_option('brand_stat_number_3')); ?></h1>
                         <p class="home-brand-showcase__stat-label">professional R&D teams</p>
                     </div>
                 </div>
             </div>
             <div class="home-brand-showcase__stat-item home-brand-showcase__stat-item--large">
-                <h1 class="home-brand-showcase__stat-number">3</h1>
+                <h1 class="home-brand-showcase__stat-number"><?php echo esc_html(get_option('brand_stat_number_4')); ?></h1>
                 <p class="home-brand-showcase__stat-label">factories& a million-level dust-free workshop</p>
             </div>
             <div class="home-brand-showcase__badges">
@@ -88,8 +90,8 @@ get_header(); ?>
         </div>
         <div class="home-solution__right">
             <div class="home-solution__featured">
-                <h1 class="home-solution__featured-title">祛痘</h1>
-                <p class="home-solution__featured-desc">说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明说明</p>
+                <h1 class="home-solution__featured-title"></h1>
+                <p class="home-solution__featured-desc"></p>
             </div>
             <a class="home-solution__detail-btn">查看详情</a>
         </div>
