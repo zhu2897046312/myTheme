@@ -372,7 +372,9 @@ function save_event_image_meta($post_id) {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
 
     // 检查权限
-    if ('news_event' != $_POST['post_type']) return $post_id;
+    // if ('news_event' != $_POST['post_type']) return $post_id;
+    $post_type = get_post_type($post_id);
+    if ($post_type !== 'news_event') return $post_id;
 
     // 保存图片 URL
     if (isset($_POST['event_image_url'])) {
@@ -436,7 +438,9 @@ function save_personal_image_meta($post_id) {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
 
     // 检查权限
-    if ('customer_voice' != $_POST['post_type']) return $post_id;
+    // if ('customer_voice' != $_POST['post_type']) return $post_id;
+    $post_type = get_post_type($post_id);
+    if ($post_type !== 'customer_voice') return $post_id;
 
     // 保存图片 URL
     if (isset($_POST['personal_image_url'])) {
@@ -454,7 +458,9 @@ function personal_name_meta_box($post) {
 }
 function save_personal_name_meta($post_id) {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
-    if ('customer_voice' != $_POST['post_type']) return $post_id;
+    // if ('customer_voice' != $_POST['post_type']) return $post_id;
+    $post_type = get_post_type($post_id);
+    if ($post_type !== 'customer_voice') return $post_id;
 
     if (isset($_POST['personal_name'])) {
         update_post_meta($post_id, '_personal_name', sanitize_text_field($_POST['personal_name']));
@@ -517,7 +523,9 @@ function save_brand_logo_meta($post_id) {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
 
     // 检查权限
-    if ('cooperative_brand' != $_POST['post_type']) return $post_id;
+    // if ('cooperative_brand' != $_POST['post_type']) return $post_id;
+    $post_type = get_post_type($post_id);
+    if ($post_type !== 'cooperative_brand') return $post_id;
 
     // 保存图片 URL
     if (isset($_POST['brand_logo_url'])) {
