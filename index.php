@@ -150,8 +150,6 @@ get_header(); ?>
             <a class="home-news__contact-btn">联系我们</a>
         </div>
         <div class="home-news__grid">
-            <?php for($i = 1; $i <= 4; $i++) : ?>
-            <div class="home-news__item">
                 <?php
                 // WP_Query 用来获取 News & Events 类型的文章
                 $args = array(
@@ -164,16 +162,18 @@ get_header(); ?>
                 if ($query->have_posts()) :
                     while ($query->have_posts()) : $query->the_post();
                 ?>
-                        <?php
-                        // 获取上传的活动图片
-                        $event_image_url = get_post_meta(get_the_ID(), '_event_image', true);
+                        <div class="home-news__item">
+                            <?php
+                            // 获取上传的活动图片
+                            $event_image_url = get_post_meta(get_the_ID(), '_event_image', true);
 
-                        if ($event_image_url) : ?>
-                                <img src="<?php echo esc_url($event_image_url); ?>" alt="活动图片" class="home-news__image">
-                        <?php endif; ?>
-                        <div class="home-news__content-wrapper">
-                            <h1 class="home-news__item-title"><?php the_title(); ?></h1>
-                            <p class="home-news__item-desc"><?php the_excerpt(); ?></p>
+                            if ($event_image_url) : ?>
+                                    <img src="<?php echo esc_url($event_image_url); ?>" alt="活动图片" class="home-news__image">
+                            <?php endif; ?>
+                            <div class="home-news__content-wrapper">
+                                <h1 class="home-news__item-title"><?php the_title(); ?></h1>
+                                <p class="home-news__item-desc"><?php the_excerpt(); ?></p>
+                            </div>
                         </div>
                 <?php 
                     endwhile;
@@ -183,9 +183,7 @@ get_header(); ?>
 
                 // 重置查询
                 wp_reset_postdata();
-                ?>
-            </div>
-            <?php endfor; ?>
+                ?> 
         </div>
     </div>
 </section>
@@ -196,20 +194,43 @@ get_header(); ?>
             <h1 class="home-merchant-recommend__title">数千万商家的选择</h1>
         </div>
         <div class="home-merchant-recommend__testimonials">
-            <div class="home-merchant-recommend__testimonial">
-                <img src="<?php echo get_theme_file_uri("assets/images/binsss.png"); ?>" alt="商家头像" class="home-merchant-recommend__avatar">
-                <div class="home-merchant-recommend__content">
-                    <p class="home-merchant-recommend__quote">内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍</p>
-                    <span class="home-merchant-recommend__author">--姓名</span>
-                </div>
-            </div>
-            <div class="home-merchant-recommend__testimonial">
-                <img src="<?php echo get_theme_file_uri("assets/images/binsss.png"); ?>" alt="商家头像" class="home-merchant-recommend__avatar">
-                <div class="home-merchant-recommend__content">
-                    <p class="home-merchant-recommend__quote">内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍内容介绍</p>
-                    <span class="home-merchant-recommend__author">--姓名</span>
-                </div>
-            </div>
+            <?php
+            // WP_Query 用来获取 News & Events 类型的文章
+            $args = array(
+                'post_type' => 'customer_voice', // 查询 news_event 文章类型
+                'posts_per_page' => 2, // 可设置为你需要的数量，1 代表只显示一篇
+            );
+            $query = new WP_Query($args);
+
+            // 循环输出查询结果
+            if ($query->have_posts()) :
+                while ($query->have_posts()) : $query->the_post();
+            ?>
+                    <div class="home-merchant-recommend__testimonial">
+                        <?php
+                        // 获取上传的活动图片
+                        $event_image_url = get_post_meta(get_the_ID(), '_personal_image', true);
+
+                        if ($event_image_url) : ?>
+                                <img src="<?php echo esc_url($event_image_url); ?>" alt="活动图片" class="home-merchant-recommend__avatar">
+                        <?php endif; ?>
+                        <div class="home-merchant-recommend__content">
+                            <p class="home-news__item-desc"><?php the_excerpt(); ?></p>
+                            <?php
+                            $personal_name = get_post_meta(get_the_ID(), '_personal_name', true);
+                            ?>
+                            <span>--<?php echo esc_html($personal_name ? $personal_name : '匿名客户'); ?></span>
+                        </div>
+                    </div>
+            <?php 
+                endwhile;
+            else :
+                echo '<p>没有找到相关的展会活动。</p>';
+            endif;
+
+            // 重置查询
+            wp_reset_postdata();
+            ?> 
         </div>
     </div>
 </section>

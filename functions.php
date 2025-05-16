@@ -19,20 +19,26 @@
 add_action('after_setup_theme', 'my_theme_register_menus');
 
 function enzoeys_enqueue_styles() {
-    // 自定义style
-    wp_enqueue_style('brand-style', get_template_directory_uri() . '/assets/css/home/brand.css');
-    wp_enqueue_style('contact-style', get_template_directory_uri() . '/assets/css/home/contact.css');
-    wp_enqueue_style('events-style', get_template_directory_uri() . '/assets/css/home/events.css');
-    wp_enqueue_style('hero-style', get_template_directory_uri() . '/assets/css/home/hero.css');
-    wp_enqueue_style('merchant-style', get_template_directory_uri() . '/assets/css/home/merchant.css');
-    wp_enqueue_style('news-style', get_template_directory_uri() . '/assets/css/home/news.css');
-    wp_enqueue_style('partners-style', get_template_directory_uri() . '/assets/css/home/partners.css');
-    wp_enqueue_style('solution-style', get_template_directory_uri() . '/assets/css/home/solution.css');
-    wp_enqueue_style('footer-style', get_template_directory_uri() . '/assets/css/footer.css');
-    wp_enqueue_style('header-style', get_template_directory_uri() . '/assets/css/header.css');
-    // Font Awesome 图标库
-    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+    $theme_dir = get_template_directory_uri();
+    $theme_path = get_template_directory();
+
+    // 每个 CSS 带上文件修改时间作为版本号
+    wp_enqueue_style('brand-style', $theme_dir . '/assets/css/home/brand.css', [], filemtime($theme_path . '/assets/css/home/brand.css'));
+    wp_enqueue_style('contact-style', $theme_dir . '/assets/css/home/contact.css', [], filemtime($theme_path . '/assets/css/home/contact.css'));
+    wp_enqueue_style('events-style', $theme_dir . '/assets/css/home/events.css', [], filemtime($theme_path . '/assets/css/home/events.css'));
+    wp_enqueue_style('hero-style', $theme_dir . '/assets/css/home/hero.css', [], filemtime($theme_path . '/assets/css/home/hero.css'));
+    wp_enqueue_style('merchant-style', $theme_dir . '/assets/css/home/merchant.css', [], filemtime($theme_path . '/assets/css/home/merchant.css'));
+    wp_enqueue_style('news-style', $theme_dir . '/assets/css/home/news.css', [], filemtime($theme_path . '/assets/css/home/news.css'));
+    wp_enqueue_style('partners-style', $theme_dir . '/assets/css/home/partners.css', [], filemtime($theme_path . '/assets/css/home/partners.css'));
+    wp_enqueue_style('solution-style', $theme_dir . '/assets/css/home/solution.css', [], filemtime($theme_path . '/assets/css/home/solution.css'));
+
+    wp_enqueue_style('footer-style', $theme_dir . '/assets/css/footer.css', [], filemtime($theme_path . '/assets/css/footer.css'));
+    wp_enqueue_style('header-style', $theme_dir . '/assets/css/header.css', [], filemtime($theme_path . '/assets/css/header.css'));
+
+    // CDN 的 Font Awesome 不变
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', [], '5.15.4');
 }
+
 add_action('wp_enqueue_scripts', 'enzoeys_enqueue_styles');
 
 // 加载后台媒体库脚本（确保只在后台页面加载）
@@ -241,6 +247,21 @@ function enzoeys_custom_post_types() {
             'menu_icon' => 'dashicons-megaphone',
         )
     );
+
+    // 客户之声
+    register_post_type('customer_voice',
+        array(
+            'labels' => array(
+                'name' => __('Voice of the Customer', 'enzoeys'),
+                'singular_name' => __('News & Event', 'enzoeys')
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'info-center'),
+            'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+            'menu_icon' => 'dashicons-megaphone',
+        )
+    );
 }
 add_action('init', 'enzoeys_custom_post_types');
 
@@ -255,6 +276,24 @@ function add_custom_meta_boxes() {
         'normal',                // 显示位置
         'high'                   // 显示优先级
     );
+
+    add_meta_box(
+        'personal_image',         // Meta box ID
+        '客户头像',               // 标题
+        'personal_image_meta_box',  // 回调函数
+        'customer_voice',        // 自定义文章类型
+        'normal',                // 显示位置
+        'high'                   // 显示优先级
+    );
+    add_meta_box(
+        'personal_name',               // Meta box ID
+        '客户姓名',                    // 标题
+        'personal_name_meta_box',      // 回调函数
+        'customer_voice',              // 自定义文章类型
+        'normal',                      // 显示位置
+        'high'                         // 优先级
+    );
+    
 }
 add_action('add_meta_boxes', 'add_custom_meta_boxes');
 
@@ -320,3 +359,87 @@ function save_event_image_meta($post_id) {
     }
 }
 add_action('save_post', 'save_event_image_meta');
+
+
+// 自定义字段 HTML 内容
+function personal_image_meta_box($post) {
+    // 获取当前图片的 URL（如果有的话）
+    $personal_image_url = get_post_meta($post->ID, '_personal_image', true);
+    ?>
+    <label for="personal_image_url">选择活动图片：</label>
+    <input type="text" id="personal_image_url" name="personal_image_url" value="<?php echo esc_attr($personal_image_url); ?>" style="width: 80%;" />
+    <input type="button" class="button" value="上传图片" id="upload_personal_image_button" />
+    <p class="description">点击按钮上传或选择活动图片</p>
+
+    <script type="text/javascript">
+         jQuery(document).ready(function($){
+             var mediaUploader;
+             
+             // 按钮点击事件
+             $('#upload_personal_image_button').click(function(e) {
+                 e.preventDefault();
+                 
+                 // 如果媒体框已经存在，则重新打开
+                 if (mediaUploader) {
+                     mediaUploader.open();
+                     return;
+                 }
+ 
+                 // 创建媒体框
+                 mediaUploader = wp.media.frames.file_frame = wp.media({
+                     title: '选择活动图片',
+                     button: {
+                         text: '选择图片'
+                     },
+                     multiple: false // 只允许选择一张图片
+                 });
+ 
+                 // 选择图片后的事件
+                 mediaUploader.on('select', function() {
+                     var attachment = mediaUploader.state().get('selection').first().toJSON();
+                     // 将选中的图片URL填入输入框
+                     $('#personal_image_url').val(attachment.url);
+                 });
+ 
+                 // 打开媒体框
+                 mediaUploader.open();
+             });
+         });
+     </script>
+    <?php
+}
+
+// 保存自定义字段的值
+function save_personal_image_meta($post_id) {
+    // 检查是否为自动保存
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
+
+    // 检查权限
+    if ('customer_voice' != $_POST['post_type']) return $post_id;
+
+    // 保存图片 URL
+    if (isset($_POST['personal_image_url'])) {
+        update_post_meta($post_id, '_personal_image', sanitize_text_field($_POST['personal_image_url']));
+    }
+}
+add_action('save_post', 'save_personal_image_meta');
+
+function personal_name_meta_box($post) {
+    $personal_name = get_post_meta($post->ID, '_personal_name', true);
+    ?>
+    <label for="personal_name">请输入客户姓名：</label>
+    <input type="text" id="personal_name" name="personal_name" value="<?php echo esc_attr($personal_name); ?>" style="width: 80%;" />
+    <?php
+}
+function save_personal_name_meta($post_id) {
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
+    if ('customer_voice' != $_POST['post_type']) return $post_id;
+
+    if (isset($_POST['personal_name'])) {
+        update_post_meta($post_id, '_personal_name', sanitize_text_field($_POST['personal_name']));
+    }
+}
+add_action('save_post', 'save_personal_name_meta');
+
+
+

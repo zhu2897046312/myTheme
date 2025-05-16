@@ -39,7 +39,6 @@
 
 .home-news__item {
     background: #fff;
-    border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s;
 }

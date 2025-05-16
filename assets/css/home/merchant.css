@@ -22,6 +22,7 @@
 }
 .home-merchant-recommend__testimonial{
     display: flex;
+    justify-content: center;
 }
 .home-merchant-recommend__content{
     margin-left: 40px;
