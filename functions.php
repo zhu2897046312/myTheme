@@ -324,6 +324,19 @@ function enzoeys_custom_post_types() {
             'menu_icon' => 'dashicons-megaphone',
         )
     );    
+
+    //联系我们
+    register_post_type('contact_form', [
+        'labels' => [
+            'name' => '联系列表',
+            'singular_name' => '联系信息',
+        ],
+        'public' => false,
+        'show_ui' => true, // 在后台显示
+        'supports' => ['title', 'custom-fields'],
+        'menu_position' => 25,
+        'menu_icon' => 'dashicons-email',
+    ]);
 }
 add_action('init', 'enzoeys_custom_post_types');
 
@@ -580,6 +593,40 @@ function save_brand_logo_meta($post_id) {
     }
 }
 add_action('save_post', 'save_brand_logo_meta');
+
+
+function save_contact_form_handler() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $name    = sanitize_text_field($_POST['name']);
+        $phone   = sanitize_text_field($_POST['phone']);
+        $email   = sanitize_email($_POST['email']);
+        $company = sanitize_text_field($_POST['company']);
+        $city    = sanitize_text_field($_POST['city']);
+        $message = sanitize_textarea_field($_POST['message']);
+
+        // 插入自定义文章类型 contact_form
+        $post_id = wp_insert_post([
+            'post_title'  => $name . ' 的联系信息',
+            'post_type'   => 'contact_form',
+            'post_status' => 'publish',
+            'meta_input'  => [
+                '姓名'   => $name,
+                '电话'   => $phone,
+                '邮箱'   => $email,
+                '企业'   => $company,
+                '城市'   => $city,
+                '内容'   => $message,
+            ]
+        ]);
+
+        // 成功后重定向
+        wp_redirect(home_url('/contact-success')); // 可改为你的成功页
+        exit;
+    }
+}
+add_action('admin_post_nopriv_save_contact_form', 'save_contact_form_handler');
+add_action('admin_post_save_contact_form', 'save_contact_form_handler');
+
 
 
 

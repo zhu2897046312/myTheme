@@ -332,33 +332,37 @@ get_header(); ?>
         <div class="home-contact__header">
             <h1 class="home-contact__title">联系我们</h1>
         </div>
-       <div class="home-contact__form-wrapper">
-            <form class="home-contact__form" action="#">
+        <div class="home-contact__form-wrapper">
+            <form class="home-contact__form" method="post" action="<?php echo esc_url(admin_url('admin-post.php')); ?>">
+                <input type="hidden" name="action" value="save_contact_form">
+
                 <div class="home-contact__form-group-1">
-                <label class="home-contact__form-group" title="姓名">
-                    <input type="text" placeholder="姓名" class="home-contact__input">
-                </label>
-                <label class="home-contact__form-group" title="电话">
-                    <input type="text" placeholder="电话" class="home-contact__input">
-                </label>
-                <label class="home-contact__form-group" title="邮箱">
-                    <input type="text" placeholder="邮箱" class="home-contact__input">
-                </label>
-                <label class="home-contact__form-group" title="企业">
-                    <input type="text" placeholder="企业" class="home-contact__input">
-                </label>
-                <label class="home-contact__form-group" title="城市">
-                    <input type="text" placeholder="城市" class="home-contact__input">
-                </label>
+                    <label class="home-contact__form-group" title="姓名">
+                        <input type="text" name="name" placeholder="姓名" class="home-contact__input" required>
+                    </label>
+                    <label class="home-contact__form-group" title="电话">
+                        <input type="text" name="phone" placeholder="电话" class="home-contact__input">
+                    </label>
+                    <label class="home-contact__form-group" title="邮箱">
+                        <input type="email" name="email" placeholder="邮箱" class="home-contact__input">
+                    </label>
+                    <label class="home-contact__form-group" title="企业">
+                        <input type="text" name="company" placeholder="企业" class="home-contact__input">
+                    </label>
+                    <label class="home-contact__form-group" title="城市">
+                        <input type="text" name="city" placeholder="城市" class="home-contact__input">
+                    </label>
                 </div>
+
                 <div class="home-contact__form-group-2">
-                <label title="内容">
-                    <textarea placeholder="内容" class="home-contact__input-2"></textarea>
-                </label>
+                    <label title="内容">
+                        <textarea name="message" placeholder="内容" class="home-contact__input-2"></textarea>
+                    </label>
                 </div>  
+
+                <button type="submit" class="home-contact__submit-btn">提交</button>
             </form>
-       </div>
-       <button class="home-contact__submit-btn">提交</button>
+        </div>
     </div>
 </section>
 
