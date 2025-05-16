@@ -81,3 +81,9 @@
     background-color: #0052cc;
 }
 
+.home-solution__item:hover{
+    cursor: pointer;
+}
+.home-solution__featured{
+    min-width: 350px;
+}

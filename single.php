@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
-<main class="single-post-container" style="max-width: 900px; margin: 0 auto; padding: 40px 20px;">
-
+<main class="single-post-container" style="padding-top: 100px;">
+    
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
         <article class="single-post">

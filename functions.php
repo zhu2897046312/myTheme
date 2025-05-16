@@ -16,7 +16,7 @@ add_action('after_setup_theme', 'my_theme_register_menus');
 function enzoeys_enqueue_styles() {
     $theme_dir = get_template_directory_uri();
     $theme_path = get_template_directory();
-    
+
     wp_enqueue_style('main-style', get_stylesheet_uri());
 
     // 每个 CSS 带上文件修改时间作为版本号
@@ -341,7 +341,10 @@ function enzoeys_custom_post_types() {
     ]);
 }
 add_action('init', 'enzoeys_custom_post_types');
-
+//刷新固定链接
+add_action('init', function() {
+    flush_rewrite_rules();
+});
 
 // 在编辑页面添加自定义字段
 function add_custom_meta_boxes() {
