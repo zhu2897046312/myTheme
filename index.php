@@ -243,11 +243,36 @@ get_header(); ?>
             <a class="home-partners__contact-btn">联系我们</a>
         </div>
         <div class="home-partners__grid">
-            <?php for($i = 1; $i <= 10; $i++) : ?>
-            <div class="home-partners__item">
-                <img src="<?php echo get_theme_file_uri("assets/images/logo.jpg"); ?>" alt="案例<?php echo $i; ?>" class="home-partners__image">
-            </div>
-            <?php endfor; ?>
+            <?php
+            // WP_Query 用来获取 News & Events 类型的文章
+            $args = array(
+                'post_type' => 'cooperative_brand', // 查询 news_event 文章类型
+                'posts_per_page' => 10, // 可设置为你需要的数量，1 代表只显示一篇
+            );
+            $query = new WP_Query($args);
+
+            // 循环输出查询结果
+            if ($query->have_posts()) :
+                while ($query->have_posts()) : $query->the_post();
+            ?>
+                    <div class="home-partners__item">
+                        <?php
+                        // 获取上传的活动图片
+                        $event_image_url = get_post_meta(get_the_ID(), '_brand_logo', true);
+
+                        if ($event_image_url) : ?>
+                                <img src="<?php echo esc_url($event_image_url); ?>" alt="活动图片" class="home-partners__image">
+                        <?php endif; ?>
+                    </div>
+            <?php 
+                endwhile;
+            else :
+                echo '<p>没有找到相关的品牌logo。</p>';
+            endif;
+
+            // 重置查询
+            wp_reset_postdata();
+            ?> 
         </div>
     </div>
 </section>

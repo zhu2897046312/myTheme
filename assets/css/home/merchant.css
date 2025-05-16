@@ -32,4 +32,7 @@
 .home-merchant-recommend__content span{
     text-align: end;
 }
-
+.home-merchant-recommend__avatar{
+    width: 200px;
+    height: 200px;
+}

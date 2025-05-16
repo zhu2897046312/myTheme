@@ -262,6 +262,21 @@ function enzoeys_custom_post_types() {
             'menu_icon' => 'dashicons-megaphone',
         )
     );
+
+    // 客户之声
+    register_post_type('cooperative_brand',
+        array(
+            'labels' => array(
+                'name' => __('Cooperative brand', 'enzoeys'),
+                'singular_name' => __('Cooperative brand', 'enzoeys')
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'info-center'),
+            'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+            'menu_icon' => 'dashicons-megaphone',
+        )
+    );
 }
 add_action('init', 'enzoeys_custom_post_types');
 
@@ -276,7 +291,6 @@ function add_custom_meta_boxes() {
         'normal',                // 显示位置
         'high'                   // 显示优先级
     );
-
     add_meta_box(
         'personal_image',         // Meta box ID
         '客户头像',               // 标题
@@ -293,7 +307,14 @@ function add_custom_meta_boxes() {
         'normal',                      // 显示位置
         'high'                         // 优先级
     );
-    
+    add_meta_box(
+        'brand_logo',         // Meta box ID
+        '品牌logo',               // 标题
+        'brand_logo_meta_box',  // 回调函数
+        'cooperative_brand',        // 自定义文章类型
+        'normal',                // 显示位置
+        'high'                   // 显示优先级
+    );
 }
 add_action('add_meta_boxes', 'add_custom_meta_boxes');
 
@@ -440,6 +461,70 @@ function save_personal_name_meta($post_id) {
     }
 }
 add_action('save_post', 'save_personal_name_meta');
+
+
+// 自定义字段 HTML 内容
+function brand_logo_meta_box($post) {
+    // 获取当前图片的 URL（如果有的话）
+    $brand_logo_url = get_post_meta($post->ID, '_brand_logo', true);
+    ?>
+    <label for="brand_logo_url">选择活动图片：</label>
+    <input type="text" id="brand_logo_url" name="brand_logo_url" value="<?php echo esc_attr($brand_logo_url); ?>" style="width: 80%;" />
+    <input type="button" class="button" value="上传图片" id="upload_brand_logo_button" />
+    <p class="description">点击按钮上传或选择活动图片</p>
+
+    <script type="text/javascript">
+         jQuery(document).ready(function($){
+             var mediaUploader;
+             
+             // 按钮点击事件
+             $('#upload_brand_logo_button').click(function(e) {
+                 e.preventDefault();
+                 
+                 // 如果媒体框已经存在，则重新打开
+                 if (mediaUploader) {
+                     mediaUploader.open();
+                     return;
+                 }
+ 
+                 // 创建媒体框
+                 mediaUploader = wp.media.frames.file_frame = wp.media({
+                     title: '选择活动图片',
+                     button: {
+                         text: '选择图片'
+                     },
+                     multiple: false // 只允许选择一张图片
+                 });
+ 
+                 // 选择图片后的事件
+                 mediaUploader.on('select', function() {
+                     var attachment = mediaUploader.state().get('selection').first().toJSON();
+                     // 将选中的图片URL填入输入框
+                     $('#brand_logo_url').val(attachment.url);
+                 });
+ 
+                 // 打开媒体框
+                 mediaUploader.open();
+             });
+         });
+     </script>
+    <?php
+}
+
+// 保存自定义字段的值
+function save_brand_logo_meta($post_id) {
+    // 检查是否为自动保存
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
+
+    // 检查权限
+    if ('cooperative_brand' != $_POST['post_type']) return $post_id;
+
+    // 保存图片 URL
+    if (isset($_POST['brand_logo_url'])) {
+        update_post_meta($post_id, '_brand_logo', sanitize_text_field($_POST['brand_logo_url']));
+    }
+}
+add_action('save_post', 'save_brand_logo_meta');
 
 
 
