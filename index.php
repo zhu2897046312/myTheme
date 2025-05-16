@@ -286,7 +286,7 @@
     <section class="home-partners">
         <div class="home-partners__container ">
             <div class="home-partners__header">
-                <h2 class="home-partners__title">合作品牌</h2>
+                <h2 class="home-partners__title fade delay-1">合作品牌</h2>
                 <a class="home-partners__contact-btn">联系我们</a>
             </div>
             <div class="home-partners__grid">
@@ -325,7 +325,7 @@
     </section>
     <section class="home-contact">
         <img src="<?php echo get_theme_file_uri('assets/images/bg_5.png');?>" alt="" class="home-contact__bg">
-        <div class="home-contact__content">
+        <div class="home-contact__content fade delay-1">
             <div class="home-contact__header">
                 <h1 class="home-contact__title">联系我们</h1>
             </div>
@@ -365,6 +365,9 @@
 
                     <button type="submit" class="home-contact__submit-btn">提交</button>
                 </form>
+            </div>
+            <div>
+                <p style="color: #878787;">提交此表格内容即表示您同意我们根据隐私声明使用您的数据进行电子邮件营销</p>
             </div>
         </div>
     </section>
