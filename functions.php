@@ -16,6 +16,8 @@ add_action('after_setup_theme', 'my_theme_register_menus');
 function enzoeys_enqueue_styles() {
     $theme_dir = get_template_directory_uri();
     $theme_path = get_template_directory();
+    
+    wp_enqueue_style('main-style', get_stylesheet_uri());
 
     // 每个 CSS 带上文件修改时间作为版本号
     wp_enqueue_style('brand-style', $theme_dir . '/assets/css/home/brand.css', [], filemtime($theme_path . '/assets/css/home/brand.css'));

@@ -164,7 +164,7 @@
                 if ($query->have_posts()) :
                     while ($query->have_posts()) : $query->the_post();
                 ?>
-                        <div class="home-events__image-wrapper">
+                        <div class="home-events__image-wrapper animate-fade-in-left">
                             <?php
                             // 获取上传的活动图片
                             $event_image_url = get_post_meta(get_the_ID(), '_event_image', true);
@@ -173,7 +173,7 @@
                                     <img src="<?php echo esc_url($event_image_url); ?>" alt="活动图片" class="home-events__image">
                             <?php endif; ?>
                         </div>
-                        <div class="home-events__details">
+                        <div class="home-events__details animate-fade-in-right">
                             <div class="home-events__details-top">
                                 <h1 class="home-events__event-title"><?php the_title(); ?></h1>
                                 <p class="home-events__event-desc"><?php the_excerpt(); ?></p>
@@ -242,48 +242,43 @@
 
     <section class="home-merchant-recommend">
         <div class="home-merchant-recommend__container">
-            <div class="home-merchant-recommend__header">
+            <div class="home-merchant-recommend__header fade delay-3">
                 <h1 class="home-merchant-recommend__title">数千万商家的选择</h1>
             </div>
             <div class="home-merchant-recommend__testimonials">
                 <?php
-                // WP_Query 用来获取 News & Events 类型的文章
                 $args = array(
-                    'post_type' => 'customer_voice', // 查询 news_event 文章类型
-                    'posts_per_page' => 2, // 可设置为你需要的数量，1 代表只显示一篇
+                    'post_type' => 'customer_voice',
+                    'posts_per_page' => 2,
                 );
                 $query = new WP_Query($args);
 
-                // 循环输出查询结果
                 if ($query->have_posts()) :
+                    $delay = 1;
                     while ($query->have_posts()) : $query->the_post();
+                        $event_image_url = get_post_meta(get_the_ID(), '_personal_image', true);
+                        $personal_name = get_post_meta(get_the_ID(), '_personal_name', true);
                 ?>
-                        <div class="home-merchant-recommend__testimonial">
-                            <?php
-                            // 获取上传的活动图片
-                            $event_image_url = get_post_meta(get_the_ID(), '_personal_image', true);
-
-                            if ($event_image_url) : ?>
-                                    <img src="<?php echo esc_url($event_image_url); ?>" alt="活动图片" class="home-merchant-recommend__avatar">
-                            <?php endif; ?>
-                            <div class="home-merchant-recommend__content">
-                                <p class="home-news__item-desc"><?php the_excerpt(); ?></p>
-                                <?php
-                                $personal_name = get_post_meta(get_the_ID(), '_personal_name', true);
-                                ?>
-                                <span>--<?php echo esc_html($personal_name ? $personal_name : '匿名客户'); ?></span>
-                            </div>
+                    <div class="home-merchant-recommend__testimonial fade-in-up delay-<?php echo $delay; ?>">
+                        <?php if ($event_image_url) : ?>
+                            <img src="<?php echo esc_url($event_image_url); ?>" alt="活动图片" class="home-merchant-recommend__avatar">
+                        <?php endif; ?>
+                        <div class="home-merchant-recommend__content">
+                            <p class="home-news__item-desc"><?php the_excerpt(); ?></p>
+                            <span>--<?php echo esc_html($personal_name ? $personal_name : '匿名客户'); ?></span>
                         </div>
-                <?php 
+                    </div>
+                <?php
+                    $delay++; // 逐个增加 delay
                     endwhile;
                 else :
                     echo '<p>没有找到相关的展会活动。</p>';
                 endif;
 
-                // 重置查询
                 wp_reset_postdata();
-                ?> 
+                ?>
             </div>
+
         </div>
     </section>
 
@@ -307,7 +302,7 @@
                 if ($query->have_posts()) :
                     while ($query->have_posts()) : $query->the_post();
                 ?>
-                        <div class="home-partners__item">
+                        <div class="home-partners__item fade-in-up delay-1">
                             <?php
                             // 获取上传的活动图片
                             $event_image_url = get_post_meta(get_the_ID(), '_brand_logo', true);
