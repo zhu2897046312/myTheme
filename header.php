@@ -6,6 +6,7 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+    
 <header class="site-header alignwide has-base-background-color has-background">
     <div class="header-container alignwide">
         <!-- Left Logo Area -->

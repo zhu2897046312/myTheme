@@ -39,21 +39,43 @@
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 50px;
 }
-.home-contact__form-group-1 input{
+
+.home-contact__form-group{
+    border: 2px solid #fff;
+    border-radius: 10px;
+    color: #878787;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 0px 20px;
+}
+.home-contact__form-group input{
+    flex: 1;
+    border: none;
     max-width: 500px;
     height: 50px;
     border-radius: 10px;
     border: none;
 }
+
+.home-contact__form-group-content{
+    border: 2px solid #fff;
+    border-radius: 10px;
+    color: #878787;
+    display: flex;
+    background-color: #fff;
+    padding: 0px 20px;
+}
+
 .home-contact__form-group-2{
     margin-top: 30px;
 }
 .home-contact__input-2 {
     height: 200px;
-    width: 100%; /* 可根据需要调整宽度 */
-    box-sizing: border-box; /* 确保内边距和边框不影响元素的总高度 */
+    box-sizing: border-box;
     border: none;
     border-radius: 10px;
+    flex: 1;
 }
 
 .home-contact__submit-btn{
@@ -69,4 +91,13 @@
 }
 .home-contact__submit-btn:hover{
     background-color: #0052cc;
+}
+.home-contact__input,
+.home-contact__input-2 {
+  border: none;
+}
+
+.home-contact__input:focus,
+.home-contact__input-2:focus {
+ border: none;
 }

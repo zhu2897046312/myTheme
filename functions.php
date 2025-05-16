@@ -289,7 +289,7 @@ function enzoeys_custom_post_types() {
             ),
             'public' => true,
             'has_archive' => true,
-            'rewrite' => array('slug' => 'info-center'),
+            'rewrite' => array('slug' => 'customer_voice'),
             'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
             'menu_icon' => 'dashicons-megaphone',
         )
@@ -304,7 +304,7 @@ function enzoeys_custom_post_types() {
             ),
             'public' => true,
             'has_archive' => true,
-            'rewrite' => array('slug' => 'info-center'),
+            'rewrite' => array('slug' => 'cooperative_brand'),
             'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
             'menu_icon' => 'dashicons-megaphone',
         )
@@ -319,7 +319,7 @@ function enzoeys_custom_post_types() {
             ),
             'public' => true,
             'has_archive' => true,
-            'rewrite' => array('slug' => 'info-center'),
+            'rewrite' => array('slug' => 'solutions'),
             'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
             'menu_icon' => 'dashicons-megaphone',
         )

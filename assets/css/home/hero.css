@@ -23,29 +23,30 @@
     padding: 0 20px;
     position: relative; /* 确保文字内容在正常文档流中 */
     z-index: 1; /* 将文字内容置于图片上方 */
+    text-align: center;
 }
 
-/* 淡入动画 */
 @keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: translateY(20px); /* 向下偏移 */
     }
     100% {
         opacity: 1;
-        transform: translateY(0); /* 还原到原位 */
     }
 }
 
 .home-hero__title {
     font-size: 48px;
     margin-bottom: 20px;
-    animation: fadeIn 1.5s ease-out forwards; /* 添加淡入动画 */
+    opacity: 0;
+    animation: fadeIn 2.5s ease-out forwards; 
+    animation-delay: 0.5s; 
 }
 
 .home-hero__subtitle {
     font-size: 20px;
     margin-bottom: 30px;
-    animation: fadeIn 2s ease-out forwards; /* 添加淡入动画，稍微延迟 */
-    animation-delay: 0.5s; /* 延迟 0.5 秒后开始动画 */
+    opacity: 0;
+    animation: fadeIn 3s ease-out forwards; 
+    animation-delay: 0.5s; 
 }

@@ -3,7 +3,7 @@
 .site-header {
     width: 100%;
     box-sizing: border-box;
-    position: relative;
+    position: fixed;
     z-index: 100;
     flex-shrink: 0;
 }
