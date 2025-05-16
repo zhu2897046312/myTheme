@@ -60,6 +60,12 @@ get_header(); ?>
 <section class="home-solution">
     <img src="<?php echo get_theme_file_uri('assets/images/bg_3.png');?>" alt="" class="home-solution__bg">
     <div class="home-solution__content">
+        <?php
+        $solutions = new WP_Query(array(
+            'post_type' => 'solutions',
+            'posts_per_page' => -1
+        ));
+        ?>
         <div class="home-solution__left">
             <div class="home-solution__solutions">
                 <h1 class="home-solution__industry">美容行业</h1>
@@ -67,9 +73,17 @@ get_header(); ?>
                 <button class="home-solution__more-cta">更多方案</button>
             </div>
             <div class="home-solution__items">
-                <h2 class="home-solution__item">祛痘</h2>
-                <h2 class="home-solution__item">祛痘</h2>
-                <h2 class="home-solution__item">祛痘</h2>
+                <?php if ($solutions->have_posts()) : ?>
+                    <?php while ($solutions->have_posts()) : $solutions->the_post(); ?>
+                        <h2 class="home-solution__item"
+                            data-title="<?php the_title(); ?>"
+                            data-excerpt="<?php echo get_the_excerpt(); ?>"
+                            data-link="<?php the_permalink(); ?>">
+                            <?php the_title(); ?>
+                        </h2>
+                    <?php endwhile; ?>
+                    <?php wp_reset_postdata(); ?>
+                <?php endif; ?>
             </div>
         </div>
         <div class="home-solution__right">
@@ -80,6 +94,40 @@ get_header(); ?>
             <a class="home-solution__detail-btn">查看详情</a>
         </div>
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const items = document.querySelectorAll(".home-solution__item");
+        const featuredTitle = document.querySelector(".home-solution__featured-title");
+        const featuredDesc = document.querySelector(".home-solution__featured-desc");
+        const detailBtn = document.querySelector(".home-solution__detail-btn");
+
+        // 初始化默认项
+        if (items.length > 0) {
+            const first = items[0];
+            updateFeatured(first);
+        }
+
+        items.forEach(item => {
+            item.addEventListener("click", function () {
+                updateFeatured(this);
+            });
+        });
+
+        function updateFeatured(element) {
+            const title = element.getAttribute("data-title");
+            const excerpt = element.getAttribute("data-excerpt");
+            const link = element.getAttribute("data-link");
+
+            featuredTitle.textContent = title;
+            featuredDesc.textContent = excerpt;
+            detailBtn.href = link;
+
+            // 高亮当前选中项
+            items.forEach(i => i.classList.remove("active"));
+            element.classList.add("active");
+        }
+    });
+    </script>
 </section>
 
 <!-- 品牌展示区 -->

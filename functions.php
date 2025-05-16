@@ -263,7 +263,7 @@ function enzoeys_custom_post_types() {
         )
     );
 
-    // 客户之声
+    // 合作品牌
     register_post_type('cooperative_brand',
         array(
             'labels' => array(
@@ -277,6 +277,21 @@ function enzoeys_custom_post_types() {
             'menu_icon' => 'dashicons-megaphone',
         )
     );
+
+    // 解决方案
+    register_post_type('solutions',
+        array(
+            'labels' => array(
+                'name' => __('Solutions', 'enzoeys'),
+                'singular_name' => __('Solutions', 'enzoeys')
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'rewrite' => array('slug' => 'info-center'),
+            'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+            'menu_icon' => 'dashicons-megaphone',
+        )
+    );    
 }
 add_action('init', 'enzoeys_custom_post_types');
 
