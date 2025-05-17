@@ -381,19 +381,78 @@ function enzoeys_custom_post_types() {
             pll_register_post_type($post_type);
         }
     }
+
+    // register_taxonomy_for_object_type('category', 'product');
+    // register_taxonomy_for_object_type('category', 'treatment');
+    // register_taxonomy_for_object_type('category', 'news_event');
+    // register_taxonomy_for_object_type('category', 'customer_voice');
+    // register_taxonomy_for_object_type('category', 'cooperative_brand');
+    // register_taxonomy_for_object_type('category', 'solutions');
+
 }
 add_action('init', 'enzoeys_custom_post_types',20);
 //刷新固定链接
 add_action('init', function() {
     flush_rewrite_rules();
 });
+// 为每个 CPT 添加独立自定义分类（推荐）
+function enzoeys_register_custom_taxonomies() {
+    $taxonomies = [
+        'product_category' => ['post_type' => 'product', 'name' => __('Product Categories', 'enzoeys')],
+        'treatment_category' => ['post_type' => 'treatment', 'name' => __('Treatment Categories', 'enzoeys')],
+        'news_event_category' => ['post_type' => 'news_event', 'name' => __('News/Event Categories', 'enzoeys')],
+        'customer_voice_category' => ['post_type' => 'customer_voice', 'name' => __('Customer Voice Categories', 'enzoeys')],
+        'cooperative_brand_category' => ['post_type' => 'cooperative_brand', 'name' => __('Cooperative Brand Categories', 'enzoeys')],
+        'solutions_category' => ['post_type' => 'solutions', 'name' => __('Solutions Categories', 'enzoeys')],
+    ];
 
-function enzoeys_custom_posts_per_page($query) {
-    if (!is_admin() && $query->is_main_query() && is_post_type_archive()) {
-        $query->set('posts_per_page', 1); // 每页只显示1篇
+    foreach ($taxonomies as $slug => $args) {
+        register_taxonomy($slug, $args['post_type'], array(
+            'hierarchical' => true,
+            'labels' => array(
+                'name' => $args['name'],
+                'singular_name' => $args['name'],
+                'search_items' => __('Search', 'enzoeys') . ' ' . $args['name'],
+                'all_items' => __('All', 'enzoeys') . ' ' . $args['name'],
+                'parent_item' => __('Parent', 'enzoeys') . ' ' . $args['name'],
+                'edit_item' => __('Edit', 'enzoeys') . ' ' . $args['name'],
+                'update_item' => __('Update', 'enzoeys') . ' ' . $args['name'],
+                'add_new_item' => __('Add New', 'enzoeys') . ' ' . $args['name'],
+                'new_item_name' => __('New', 'enzoeys') . ' ' . $args['name'],
+                'menu_name' => $args['name'],
+            ),
+            'show_ui' => true,
+            'show_in_rest' => true,
+            'rewrite' => array('slug' => $slug),
+        ));
+    }
+    
+}
+add_action('init', 'enzoeys_register_custom_taxonomies',5);
+function enzoeys_register_taxonomies_to_polylang() {
+    if (function_exists('pll_register_taxonomy')) {
+        $taxonomies = [
+            'product_category',
+            'treatment_category',
+            'news_event_category',
+            'customer_voice_category',
+            'cooperative_brand_category',
+            'solutions_category'
+        ];
+        foreach ($taxonomies as $taxonomy) {
+            pll_register_taxonomy($taxonomy);
+        }
     }
 }
-add_action('pre_get_posts', 'enzoeys_custom_posts_per_page');
+add_action('init', 'enzoeys_register_taxonomies_to_polylang', 20);
+
+//分页数设置
+// function enzoeys_custom_posts_per_page($query) {
+//     if (!is_admin() && $query->is_main_query() && is_post_type_archive()) {
+//         $query->set('posts_per_page', 1); // 每页只显示1篇
+//     }
+// }
+// add_action('pre_get_posts', 'enzoeys_custom_posts_per_page');
 
 // 在编辑页面添加自定义字段
 function add_custom_meta_boxes() {
