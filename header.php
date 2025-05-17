@@ -45,11 +45,16 @@
             
             <!-- Language Switcher -->
             <div class="language-switcher" style="margin-left:30px">
-                <select onchange="location = this.value;">
-                    <option value="<?php echo home_url('/'); ?>"><?php _e('中文', 'enzoeys'); ?></option>
-                    <option value="<?php echo home_url('/en/'); ?>"><?php _e('English', 'enzoeys'); ?></option>
-                    <option value="<?php echo home_url('/ja/'); ?>"><?php _e('日本語', 'enzoeys'); ?></option>
-                </select>
+            <?php if (function_exists('pll_the_languages')): ?>
+                <div class="language-switcher">
+                    <?php pll_the_languages(array(
+                        'dropdown' => 1,
+                        'show_names' => 1,
+                        'display_names_as' => 'name',
+                        'hide_if_empty' => 0,
+                    )); ?>
+                </div>
+            <?php endif; ?>
             </div>
             
             <!-- Search Button -->
