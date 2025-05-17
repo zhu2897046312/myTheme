@@ -177,11 +177,19 @@ function theme_settings_page() {
             <table class="form-table">
                 <tr>
                     <th>Footer Logo</th>
-                    <td><input type="text" name="footer_logo" value="<?php echo esc_attr(get_option("footer_logo")); ?>" /></td>
+                    <td>
+                        <input type="text" name="footer_logo" value="<?php echo esc_attr(get_option("footer_logo")); ?>" />
+                        <input type="button" class="button" value="上传 Logo" id="upload_logo_button" />
+                        <p class="description">上传或粘贴 Footer Logo 图片的 URL</p>
+                    </td>
                 </tr>
                 <tr>
                     <th>Header Logo</th>
-                    <td><input type="text" name="header_logo" value="<?php echo esc_attr(get_option("header_logo")); ?>" /></td>
+                    <td>
+                        <input type="text" name="header_logo" value="<?php echo esc_attr(get_option("header_logo")); ?>" />
+                        <input type="button" class="button" value="上传 Logo" id="header-upload_logo_button" />
+                        <p class="description">上传或粘贴 Header Logo 图片的 URL</p>
+                    </td>
                 </tr>
                 <tr>
                     <th>查看详情链接</th>
