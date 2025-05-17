@@ -57,12 +57,16 @@
             <div class="footer-main__row row">
                 <!-- Company Info Section -->
                 <div class="footer-main__item col-lg-3 col-md-6">
+                    <?php
+                    $lang = function_exists('pll_current_language') ? pll_current_language() : '';
+                    $suffix = $lang ? "_$lang" : '';
+                    ?>
                     <div class="footer-info">
-                        <p><?php echo esc_html(get_option('company_description')); ?></p>
-                        <p><strong><?php _e('Email:', 'enzoeys'); ?></strong> <?php echo esc_html(get_option('company_email')); ?></p>
-                        <p><strong><?php _e('Contact:', 'enzoeys'); ?></strong> <?php echo esc_html(get_option('company_contact')); ?></p>
-                        <p><strong><?php _e('Phone:', 'enzoeys'); ?></strong> <?php echo esc_html(get_option('company_phone')); ?></p>
-                        <p><strong><?php _e('Address:', 'enzoeys'); ?></strong> <?php echo esc_html(get_option('company_address')); ?></p>
+                        <p><?php echo esc_html(get_option("company_description$suffix")); ?></p>
+                        <p><strong><?php _e('Email:', 'enzoeys'); ?></strong> <?php echo esc_html(get_option("company_email$suffix")); ?></p>
+                        <p><strong><?php _e('Contact:', 'enzoeys'); ?></strong> <?php echo esc_html(get_option("company_contact$suffix")); ?></p>
+                        <p><strong><?php _e('Phone:', 'enzoeys'); ?></strong> <?php echo esc_html(get_option("company_phone$suffix")); ?></p>
+                        <p><strong><?php _e('Address:', 'enzoeys'); ?></strong> <?php echo esc_html(get_option("company_address$suffix")); ?></p>
                     </div>
                     <div class="social-links">
                         <?php

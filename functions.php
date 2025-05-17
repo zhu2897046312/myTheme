@@ -63,154 +63,145 @@ function theme_settings_menu() {
 add_action('admin_menu', 'theme_settings_menu');
 // 注册设置
 function theme_register_settings() {
-    // 公司信息
-    register_setting('theme-settings-group', 'company_description');
-    register_setting('theme-settings-group', 'company_email');
-    register_setting('theme-settings-group', 'company_contact');
-    register_setting('theme-settings-group', 'company_phone');
-    register_setting('theme-settings-group', 'company_address');
-    
-    // 社交媒体链接
+    $languages = function_exists('pll_languages_list') ? pll_languages_list() : [''];
+
+    foreach ($languages as $lang) {
+        $suffix = $lang ? "_$lang" : '';
+
+        // 公司信息
+        register_setting('theme-settings-group', "company_description$suffix");
+        register_setting('theme-settings-group', "company_email$suffix");
+        register_setting('theme-settings-group', "company_contact$suffix");
+        register_setting('theme-settings-group', "company_phone$suffix");
+        register_setting('theme-settings-group', "company_address$suffix");
+
+        // 服务
+        for ($i = 1; $i <= 4; $i++) {
+            register_setting('theme-settings-group', "service_title_{$i}{$suffix}");
+            register_setting('theme-settings-group', "service_desc_{$i}{$suffix}");
+        }
+
+        // 品牌
+        register_setting('theme-settings-group', "brand_slogan_title$suffix");
+        register_setting('theme-settings-group', "brand_slogan_desc$suffix");
+        register_setting('theme-settings-group', "brand_intro_text$suffix");
+
+        for ($i = 1; $i <= 4; $i++) {
+            register_setting('theme-settings-group', "brand_stat_number_{$i}{$suffix}");
+        }
+
+        register_setting('theme-settings-group', "brand_cta_link$suffix");
+    }
+
+    // 通用字段（不需要多语言）
+    register_setting('theme-settings-group', 'footer_logo');
+    register_setting('theme-settings-group', 'header_logo');
     register_setting('theme-settings-group', 'social_facebook');
     register_setting('theme-settings-group', 'social_youtube');
     register_setting('theme-settings-group', 'social_twitter');
-    
-    // 服务特点
-    for($i = 1; $i <= 4; $i++) {
-        register_setting('theme-settings-group', "service_title_$i");
-        register_setting('theme-settings-group', "service_desc_$i");
-        register_setting('theme-settings-group', "service_icon_$i");
-    }
-
-    // 注册 footer logo
-    register_setting('theme-settings-group', 'footer_logo');
-    register_setting('theme-settings-group', 'header_logo');
-
-    // 品牌口号设置
-    register_setting('theme-settings-group', 'brand_slogan_title');
-    register_setting('theme-settings-group', 'brand_slogan_desc');
-    register_setting('theme-settings-group', 'brand_intro_text');
-    for($i = 1; $i <= 4; $i++) {
-        register_setting('theme-settings-group', "brand_stat_number_$i");
-    }
-    register_setting('theme-settings-group', 'brand_cta_link');
-
 }
+
 add_action('admin_init', 'theme_register_settings');
 
 // 设置页面HTML
 function theme_settings_page() {
+    $current_lang = function_exists('pll_current_language') ? pll_current_language() : '';
+    $suffix = $current_lang ? "_$current_lang" : '';
 ?>
     <div class="wrap">
-        <h2>主题设置</h2>
+        <h2>主题设置（当前语言：<?php echo strtoupper($current_lang ?: '默认'); ?>）</h2>
         <form method="post" action="options.php">
             <?php settings_fields('theme-settings-group'); ?>
-            
+
             <h3>公司信息</h3>
             <table class="form-table">
                 <tr>
                     <th>公司简介</th>
-                    <td><textarea name="company_description" rows="5" cols="50"><?php echo esc_attr(get_option('company_description')); ?></textarea></td>
+                    <td><textarea name="company_description<?php echo $suffix; ?>" rows="5" cols="50"><?php echo esc_textarea(get_option("company_description$suffix")); ?></textarea></td>
                 </tr>
                 <tr>
                     <th>邮箱</th>
-                    <td><input type="email" name="company_email" value="<?php echo esc_attr(get_option('company_email')); ?>" /></td>
+                    <td><input type="email" name="company_email<?php echo $suffix; ?>" value="<?php echo esc_attr(get_option("company_email$suffix")); ?>" /></td>
                 </tr>
                 <tr>
                     <th>联系人</th>
-                    <td><input type="text" name="company_contact" value="<?php echo esc_attr(get_option('company_contact')); ?>" /></td>
+                    <td><input type="text" name="company_contact<?php echo $suffix; ?>" value="<?php echo esc_attr(get_option("company_contact$suffix")); ?>" /></td>
                 </tr>
                 <tr>
                     <th>电话</th>
-                    <td><input type="text" name="company_phone" value="<?php echo esc_attr(get_option('company_phone')); ?>" /></td>
+                    <td><input type="text" name="company_phone<?php echo $suffix; ?>" value="<?php echo esc_attr(get_option("company_phone$suffix")); ?>" /></td>
                 </tr>
                 <tr>
                     <th>地址</th>
-                    <td><input type="text" name="company_address" value="<?php echo esc_attr(get_option('company_address')); ?>" /></td>
+                    <td><input type="text" name="company_address<?php echo $suffix; ?>" value="<?php echo esc_attr(get_option("company_address$suffix")); ?>" /></td>
                 </tr>
             </table>
-            
-            <h3>社交媒体链接</h3>
-            <table class="form-table">
-                <tr>
-                    <th>Facebook</th>
-                    <td><input type="url" name="social_facebook" value="<?php echo esc_attr(get_option('social_facebook')); ?>" /></td>
-                </tr>
-                <tr>
-                    <th>YouTube</th>
-                    <td><input type="url" name="social_youtube" value="<?php echo esc_attr(get_option('social_youtube')); ?>" /></td>
-                </tr>
-                <tr>
-                    <th>Twitter</th>
-                    <td><input type="url" name="social_twitter" value="<?php echo esc_attr(get_option('social_twitter')); ?>" /></td>
-                </tr>
-            </table>
-            
+
             <h3>服务特点</h3>
-            <?php for($i = 1; $i <= 4; $i++) : ?>
+            <?php for ($i = 1; $i <= 4; $i++) : ?>
             <table class="form-table">
                 <tr>
                     <th>服务<?php echo $i; ?>标题</th>
-                    <td><input type="text" name="service_title_<?php echo $i; ?>" value="<?php echo esc_attr(get_option("service_title_$i")); ?>" /></td>
+                    <td><input type="text" name="service_title_<?php echo $i . $suffix; ?>" value="<?php echo esc_attr(get_option("service_title_{$i}{$suffix}")); ?>" /></td>
                 </tr>
                 <tr>
                     <th>服务<?php echo $i; ?>描述</th>
-                    <td><input type="text" name="service_desc_<?php echo $i; ?>" value="<?php echo esc_attr(get_option("service_desc_$i")); ?>" /></td>
-                </tr>
-                <tr>
-                    <th>服务<?php echo $i; ?>图标</th>
-                    <td>
-                        <input type="text" name="service_icon_<?php echo $i; ?>" value="<?php echo esc_attr(get_option("service_icon_$i")); ?>" />
-                        <p class="description">输入图标文件URL</p>
-                    </td>
+                    <td><input type="text" name="service_desc_<?php echo $i . $suffix; ?>" value="<?php echo esc_attr(get_option("service_desc_{$i}{$suffix}")); ?>" /></td>
                 </tr>
             </table>
             <?php endfor; ?>
 
-            <h3>Footer Logo 上传</h3>
+            <h3>品牌口号</h3>
             <table class="form-table">
                 <tr>
-                    <th>上传 Footer Logo</th>
-                    <td>
-                        <input type="text" name="footer_logo" value="<?php echo esc_attr(get_option('footer_logo')); ?>" />
-                        <input type="button" class="button" value="上传 Logo" id="upload_logo_button" />
-                        <p class="description">上传或粘贴 Footer Logo 图片的 URL</p>
-                    </td>
+                    <th>标题</th>
+                    <td><input type="text" name="brand_slogan_title<?php echo $suffix; ?>" value="<?php echo esc_attr(get_option("brand_slogan_title$suffix")); ?>" /></td>
                 </tr>
                 <tr>
-                    <th>上传 Header Logo</th>
-                    <td>
-                        <input type="text" name="header_logo" value="<?php echo esc_attr(get_option('header_logo')); ?>" />
-                        <input type="button" class="button" value="上传 Logo" id="header-upload_logo_button" />
-                        <p class="description">上传或粘贴 Header Logo 图片的 URL</p>
-                    </td>
+                    <th>描述</th>
+                    <td><textarea name="brand_slogan_desc<?php echo $suffix; ?>" rows="3"><?php echo esc_textarea(get_option("brand_slogan_desc$suffix")); ?></textarea></td>
+                </tr>
+                <tr>
+                    <th>介绍文字</th>
+                    <td><textarea name="brand_intro_text<?php echo $suffix; ?>" rows="4"><?php echo esc_textarea(get_option("brand_intro_text$suffix")); ?></textarea></td>
+                </tr>
+                <?php for ($i = 1; $i <= 4; $i++) : ?>
+                    <tr>
+                        <th>统计数字<?php echo $i; ?></th>
+                        <td><input type="text" name="brand_stat_number_<?php echo $i . $suffix; ?>" value="<?php echo esc_attr(get_option("brand_stat_number_{$i}{$suffix}")); ?>" /></td>
+                    </tr>
+                <?php endfor; ?>
+            </table>
+
+            <h3>Logo 与链接</h3>
+            <table class="form-table">
+                <tr>
+                    <th>Footer Logo</th>
+                    <td><input type="text" name="footer_logo" value="<?php echo esc_attr(get_option("footer_logo")); ?>" /></td>
+                </tr>
+                <tr>
+                    <th>Header Logo</th>
+                    <td><input type="text" name="header_logo" value="<?php echo esc_attr(get_option("header_logo")); ?>" /></td>
+                </tr>
+                <tr>
+                    <th>查看详情链接</th>
+                    <td><input type="url" name="brand_cta_link" value="<?php echo esc_attr(get_option("brand_cta_link")); ?>" /></td>
                 </tr>
             </table>
 
-
-            <h3>品牌口号设置</h3>
+            <h3>社交媒体</h3>
             <table class="form-table">
                 <tr>
-                    <th>品牌口号标题</th>
-                    <td><input type="text" name="brand_slogan_title" value="<?php echo esc_attr(get_option('brand_slogan_title')); ?>" /></td>
+                    <th>Facebook</th>
+                    <td><input type="url" name="social_facebook" value="<?php echo esc_attr(get_option("social_facebook")); ?>" /></td>
                 </tr>
                 <tr>
-                    <th>品牌口号描述</th>
-                    <td><textarea name="brand_slogan_desc" rows="3" cols="60"><?php echo esc_attr(get_option('brand_slogan_desc')); ?></textarea></td>
+                    <th>YouTube</th>
+                    <td><input type="url" name="social_youtube" value="<?php echo esc_attr(get_option("social_youtube")); ?>" /></td>
                 </tr>
                 <tr>
-                    <th>品牌介绍文字</th>
-                    <td><textarea name="brand_intro_text" rows="4" cols="60"><?php echo esc_attr(get_option('brand_intro_text')); ?></textarea></td>
-                </tr>
-                <?php for($i = 1; $i <= 4; $i++) : ?>
-                    <tr>
-                        <th>品牌数字相关内容 <?php echo $i; ?></th>
-                        <td><input type="text" name="brand_stat_number_<?php echo $i; ?>" value="<?php echo esc_attr(get_option("brand_stat_number_$i")); ?>" /></td>
-                    </tr>
-                <?php endfor; ?>
-                <tr>
-                    <th>查看详情链接</th>
-                    <td><input type="url" name="brand_cta_link" value="<?php echo esc_attr(get_option('brand_cta_link')); ?>" /></td>
+                    <th>Twitter</th>
+                    <td><input type="url" name="social_twitter" value="<?php echo esc_attr(get_option("social_twitter")); ?>" /></td>
                 </tr>
             </table>
 
