@@ -105,11 +105,12 @@ add_action('admin_init', 'theme_register_settings');
 
 // 设置页面HTML
 function theme_settings_page() {
-    $current_lang = function_exists('pll_current_language') ? pll_current_language() : '';
-    $suffix = $current_lang ? "_$current_lang" : '';
+    $current_lang = function_exists('pll_current_language') ? pll_current_language() : 'en';
+    $current_lang = $current_lang ?: 'en';
+    $suffix = "_$current_lang";
 ?>
     <div class="wrap">
-        <h2>主题设置（当前语言：<?php echo strtoupper($current_lang ?: '默认'); ?>）</h2>
+        <h2>主题设置（当前语言：<?php echo strtoupper($current_lang ?: ''); ?>）</h2>
         <form method="post" action="options.php">
             <?php settings_fields('theme-settings-group'); ?>
 
