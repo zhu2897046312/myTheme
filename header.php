@@ -13,11 +13,11 @@
         <div class="header-left">
             <div class="site-branding">
                 <?php 
-                $footer_logo = get_option('footer_logo');
-                if ($footer_logo) : ?>
-                    <img src="<?php echo esc_url($footer_logo); ?>" alt="Footer Logo">
+                $header_logo = get_option('header_logo');
+                if ($header_logo) : ?>
+                    <img src="<?php echo esc_url($header_logo); ?>" alt="header Logo">
                 <?php else : ?>
-                    <p>没有设置 Footer Logo。</p>
+                    <p>没有设置 header Logo。</p>
                 <?php endif; ?>
                 
                 <div class="site-title-group">

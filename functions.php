@@ -82,6 +82,7 @@ function theme_register_settings() {
 
     // 注册 footer logo
     register_setting('theme-settings-group', 'footer_logo');
+    register_setting('theme-settings-group', 'header_logo');
 
     // 品牌口号设置
     register_setting('theme-settings-group', 'brand_slogan_title');
@@ -174,6 +175,14 @@ function theme_settings_page() {
                         <p class="description">上传或粘贴 Footer Logo 图片的 URL</p>
                     </td>
                 </tr>
+                <tr>
+                    <th>上传 Header Logo</th>
+                    <td>
+                        <input type="text" name="header_logo" value="<?php echo esc_attr(get_option('header_logo')); ?>" />
+                        <input type="button" class="button" value="上传 Logo" id="header-upload_logo_button" />
+                        <p class="description">上传或粘贴 Header Logo 图片的 URL</p>
+                    </td>
+                </tr>
             </table>
 
 
@@ -225,6 +234,28 @@ function theme_settings_page() {
                     var attachment = mediaUploader.state().get('selection').first().toJSON();
                     // 设置输入框的值为选中的图片 URL
                     $('input[name="footer_logo"]').val(attachment.url);
+                });
+
+                mediaUploader.open();
+            });
+        });
+        jQuery(document).ready(function($) {
+            $('#header-upload_logo_button').click(function(e) {
+                e.preventDefault();
+
+                // 打开媒体库
+                var mediaUploader = wp.media.frames.file_frame = wp.media({
+                    title: '选择 Logo 图片',
+                    button: {
+                        text: '选择 Logo'
+                    },
+                    multiple: false // 不允许选择多张图片
+                });
+
+                mediaUploader.on('select', function() {
+                    var attachment = mediaUploader.state().get('selection').first().toJSON();
+                    // 设置输入框的值为选中的图片 URL
+                    $('input[name="header_logo"]').val(attachment.url);
                 });
 
                 mediaUploader.open();
