@@ -80,3 +80,112 @@ msgstr "搜索..."
 
 msgid "Search"
 msgstr "搜索"
+
+msgid "Company:"
+msgstr "企业："
+
+msgid "City:"
+msgstr "城市："
+
+msgid "Message:"
+msgstr "内容："
+
+msgid "Submit"
+msgstr "提交"
+
+msgid "Please enter your name"
+msgstr "请输入姓名"
+
+msgid "Please enter your phone number"
+msgstr "请输入电话号码"
+
+msgid "Please enter your email"
+msgstr "请输入邮箱"
+
+msgid "Please enter your company name"
+msgstr "请输入企业名称"
+
+msgid "Please enter your city"
+msgstr "请输入所在城市"
+
+msgid "Please enter your message"
+msgstr "请输入咨询内容"
+
+msgid "By submitting this form, you agree to the use of your data for email marketing according to our privacy policy."
+msgstr "提交此表格内容即表示您同意我们根据隐私声明使用您的数据进行电子邮件营销"
+
+msgid "Partner Brands"
+msgstr "合作品牌"
+
+msgid "Contact Us"
+msgstr "联系我们"
+
+msgid "No brand logos found."
+msgstr "没有找到相关的品牌logo。"
+
+msgid "News Center"
+msgstr "新闻中心"
+
+msgid "Contact Us"
+msgstr "联系我们"
+
+msgid "No relevant exhibitions found."
+msgstr "没有找到相关的展会活动。"
+
+msgid "Exhibition Events"
+msgstr "展会活动"
+
+msgid "Contact Us"
+msgstr "联系我们"
+
+msgid "View Details"
+msgstr "查看详情"
+
+msgid "No relevant exhibition events found."
+msgstr "没有找到相关的展会活动。"
+
+msgid "Brand Logo"
+msgstr "品牌LOGO"
+
+msgid "Product Introduction"
+msgstr "产品介绍"
+
+msgid "Beauty Industry"
+msgstr "美容行业"
+
+msgid "Solutions"
+msgstr "解决方案"
+
+msgid "More Solutions"
+msgstr "更多方案"
+
+msgid "View Details"
+msgstr "查看详情"
+
+msgid "Value Proposition Title"
+msgstr "价值主张标题"
+
+msgid "No.1 Brand for Industry Solutions"
+msgstr "行业解决方案第一品牌"
+
+msgid "Contact Us"
+msgstr "联系我们"
+
+msgid "View Details →"
+msgstr "查看详情→"
+
+msgid "of beauty industry experience"
+msgstr "美容行业经验"
+
+msgid "technical support & free online training"
+msgstr "技术支持与免费线上培训"
+
+msgid "professional R&D teams"
+msgstr "专业研发团队"
+
+msgid "factories & a million-level dust-free workshop"
+msgstr "工厂与百万级无尘车间"
+
+msgid "Certification Badge"
+msgstr "认证标志"
+
