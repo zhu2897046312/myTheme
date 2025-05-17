@@ -426,7 +426,6 @@ function enzoeys_register_custom_taxonomies() {
             'rewrite' => array('slug' => $slug),
         ));
     }
-    
 }
 add_action('init', 'enzoeys_register_custom_taxonomies',5);
 function enzoeys_register_taxonomies_to_polylang() {
@@ -445,6 +444,29 @@ function enzoeys_register_taxonomies_to_polylang() {
     }
 }
 add_action('init', 'enzoeys_register_taxonomies_to_polylang', 20);
+function enzoeys_filter_archive_by_category($query) {
+    if (!is_admin() && $query->is_main_query() && is_post_type_archive()) {
+        $post_type = $query->get('post_type');
+
+        $taxonomy_map = [
+            'product' => 'product_category',
+            'treatment' => 'treatment_category',
+            'news_event' => 'news_event_category',
+            'customer_voice' => 'customer_voice_category',
+            'cooperative_brand' => 'cooperative_brand_category',
+            'solutions' => 'solutions_category',
+        ];
+
+        if (isset($taxonomy_map[$post_type]) && !empty($_GET['filter-term'])) {
+            $query->set('tax_query', [[
+                'taxonomy' => $taxonomy_map[$post_type],
+                'field'    => 'slug',
+                'terms'    => sanitize_text_field($_GET['filter-term']),
+            ]]);
+        }
+    }
+}
+add_action('pre_get_posts', 'enzoeys_filter_archive_by_category');
 
 //分页数设置
 // function enzoeys_custom_posts_per_page($query) {

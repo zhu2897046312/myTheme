@@ -5,6 +5,49 @@
         <?php post_type_archive_title(); ?>
     </h1>
 
+    <?php
+    // 获取当前 post type
+    $post_type = get_post_type();
+
+    // 获取对应分类法
+    $taxonomy_map = [
+        'product' => 'product_category',
+        'treatment' => 'treatment_category',
+        'news_event' => 'news_event_category',
+        'customer_voice' => 'customer_voice_category',
+        'cooperative_brand' => 'cooperative_brand_category',
+        'solutions' => 'solutions_category',
+    ];
+
+    $taxonomy = isset($taxonomy_map[$post_type]) ? $taxonomy_map[$post_type] : '';
+
+    // 筛选表单
+    if ($taxonomy) :
+        $terms = get_terms([
+            'taxonomy' => $taxonomy,
+            'hide_empty' => false,
+            'lang' => pll_current_language(), // Polylang 多语言支持
+        ]);
+
+        if (!empty($terms)) :
+            ?>
+            <form method="get" action="" class="category-filter-form" style="margin-bottom: 20px;">
+                <label for="filter-term"><?php _e('Filter by Category:', 'enzoeys'); ?></label>
+                <select name="filter-term" id="filter-term" onchange="this.form.submit()">
+                    <option value=""><?php _e('All Categories', 'enzoeys'); ?></option>
+                    <?php foreach ($terms as $term) : ?>
+                        <option value="<?php echo esc_attr($term->slug); ?>" <?php selected($_GET['filter-term'] ?? '', $term->slug); ?>>
+                            <?php echo esc_html($term->name); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                <noscript><input type="submit" value="<?php esc_attr_e('Filter', 'enzoeys'); ?>"></noscript>
+            </form>
+            <?php
+        endif;
+    endif;
+    ?>
+
     <?php if (have_posts()) : ?>
         <div class="archive-posts">
             <?php while (have_posts()) : the_post(); ?>
@@ -21,28 +64,13 @@
                     </a>
 
                     <?php
-                    // 获取每篇文章的文章类型
-                    $post_type = get_post_type(get_the_ID());
-
-                    // 映射文章类型到对应分类法
-                    $taxonomy_map = [
-                        'product' => 'product_category',
-                        'treatment' => 'treatment_category',
-                        'news_event' => 'news_event_category',
-                        'customer_voice' => 'customer_voice_category',
-                        'cooperative_brand' => 'cooperative_brand_category',
-                        'solutions' => 'solutions_category',
-                    ];
-
-                    if (isset($taxonomy_map[$post_type])) {
-                        $taxonomy = $taxonomy_map[$post_type];
-                        
-                        // 调试输出：当前文章类型和分类法
+                    // 调试信息 + 显示分类
+                    if ($taxonomy) {
                         echo '<div style="background:#f9f9f9;padding:8px;border-left:4px solid #ccc;margin-bottom:10px;">';
                         echo '<strong>Debug Info:</strong><br>';
                         echo 'Post Type: <code>' . esc_html($post_type) . '</code><br>';
                         echo 'Taxonomy: <code>' . esc_html($taxonomy) . '</code><br>';
-                        
+
                         $terms = get_the_terms(get_the_ID(), $taxonomy);
 
                         if (is_wp_error($terms)) {
@@ -52,7 +80,7 @@
                         } else {
                             echo 'Terms Found: ';
                             foreach ($terms as $term) {
-                                echo '<a href="' . esc_url(get_term_link($term)) . '">' . esc_html($term->name) . '</a> ';
+                                echo '<a href="' . esc_url(get_term_link($term)) . '" class="category-link">' . esc_html($term->name) . '</a> ';
                             }
                         }
 
