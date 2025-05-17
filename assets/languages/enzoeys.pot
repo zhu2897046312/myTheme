@@ -1,0 +1,58 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Domain: mytheme\n"
+
+msgid "Service Feature 1"
+msgstr "服务特点 1"
+
+msgid "Service Feature 2"
+msgstr "服务特点 2"
+
+msgid "Service Feature 3"
+msgstr "服务特点 3"
+
+msgid "Service Feature 4"
+msgstr "服务特点 4"
+
+msgid "Description for Service Feature 1."
+msgstr "这是服务特点 1 的描述。"
+
+msgid "Description for Service Feature 2."
+msgstr "这是服务特点 2 的描述。"
+
+msgid "Description for Service Feature 3."
+msgstr "这是服务特点 3 的描述。"
+
+msgid "Description for Service Feature 4."
+msgstr "这是服务特点 4 的描述。"
+
+msgid "Footer Logo"
+msgstr "页脚 Logo"
+
+msgid "No footer logo set."
+msgstr "没有设置 Footer Logo。"
+
+msgid "Email:"
+msgstr "邮箱："
+
+msgid "Contact:"
+msgstr "联系人："
+
+msgid "Phone:"
+msgstr "电话："
+
+msgid "Address:"
+msgstr "地址："
+
+msgid "Quick Links"
+msgstr "快捷链接"
+
+msgid "Product Series"
+msgstr "产品系列"
+
+msgid "Information Center"
+msgstr "信息中心"
