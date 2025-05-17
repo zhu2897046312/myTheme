@@ -63,3 +63,27 @@ msgstr "产品系列"
 
 msgid "Information Center"
 msgstr "信息中心"
+
+msgid "No header logo set."
+msgstr "没有设置 header Logo。"
+
+msgid "Header Logo"
+msgstr "头部 Logo"
+
+msgid "中文"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "日本語"
+msgstr ""
+
+msgid "Search for:"
+msgstr "搜索内容："
+
+msgid "Search..."
+msgstr "搜索..."
+
+msgid "Search"
+msgstr "搜索"

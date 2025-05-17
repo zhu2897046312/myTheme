@@ -11,7 +11,7 @@
         'footer_menu_info_center' => '信息中心菜单',
     ));
 
-    load_theme_textdomain('enzoeys', get_template_directory() . 'assets/languages');
+    load_theme_textdomain('enzoeys', get_template_directory() . '/assets/languages');
 }
 add_action('after_setup_theme', 'my_theme_register_menus');
 
