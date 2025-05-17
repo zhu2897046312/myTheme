@@ -73,7 +73,9 @@
                 <div class="home-solution__solutions">
                     <h1 class="home-solution__industry"><?php _e('Beauty Industry', 'enzoeys'); ?></h1>
                     <h1 class="home-solution__title"><?php _e('Solutions', 'enzoeys'); ?></h1>
-                    <button class="home-solution__more-cta"><?php _e('More Solutions', 'enzoeys'); ?></button>
+                    <a href="<?php echo function_exists('pll_get_post_type_archive_link') ? pll_get_post_type_archive_link('solutions') : get_post_type_archive_link('solutions'); ?>" class="home-solution__more-cta">
+                        <?php _e('More Solutions', 'enzoeys'); ?>
+                    </a>
                 </div>
                 <div class="home-solution__items">
                     <?php if ($solutions->have_posts()) : ?>

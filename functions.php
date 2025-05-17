@@ -371,8 +371,18 @@ function enzoeys_custom_post_types() {
         'menu_position' => 25,
         'menu_icon' => 'dashicons-email',
     ]);
+
+    // 获取所有非内建文章类型（即自定义文章类型）
+    $post_types = get_post_types(['_builtin' => false]);
+
+    // 注册每个自定义文章类型给 Polylang
+    if (function_exists('pll_register_post_type')) {
+        foreach ($post_types as $post_type) {
+            pll_register_post_type($post_type);
+        }
+    }
 }
-add_action('init', 'enzoeys_custom_post_types');
+add_action('init', 'enzoeys_custom_post_types',20);
 //刷新固定链接
 add_action('init', function() {
     flush_rewrite_rules();
