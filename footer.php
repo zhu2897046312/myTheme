@@ -107,7 +107,7 @@
 
                 <!-- Quick Links Section -->
                 <div class="footer-main__item col-lg-3 col-md-6">
-                    <h5>快捷链接</h5>
+                    <h2>快捷链接</h2>
                     <?php
                     // 使用 wp_nav_menu 获取自定义菜单
                     wp_nav_menu(array(
@@ -120,7 +120,7 @@
 
                 <!-- Product Series Section -->
                 <div class="footer-main__item col-lg-3 col-md-6">
-                    <h5>产品系列</h5>
+                    <h2>产品系列</h2>
                     <?php
                     // 使用 wp_nav_menu 获取自定义菜单
                     wp_nav_menu(array(
@@ -133,7 +133,7 @@
 
                 <!-- Information Center Section -->
                 <div class="footer-main__item col-lg-3 col-md-6">
-                    <h5>信息中心</h5>
+                    <h2>信息中心</h2>
                     <?php
                     // 使用 wp_nav_menu 获取自定义菜单
                     wp_nav_menu(array(
