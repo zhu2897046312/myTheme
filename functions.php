@@ -388,6 +388,13 @@ add_action('init', function() {
     flush_rewrite_rules();
 });
 
+function enzoeys_custom_posts_per_page($query) {
+    if (!is_admin() && $query->is_main_query() && is_post_type_archive()) {
+        $query->set('posts_per_page', 1); // 每页只显示1篇
+    }
+}
+add_action('pre_get_posts', 'enzoeys_custom_posts_per_page');
+
 // 在编辑页面添加自定义字段
 function add_custom_meta_boxes() {
     add_meta_box(
